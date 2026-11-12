@@ -1,9 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">NagMe</string>
-    <string name="hello_title">Halo NagMe!</string>
-    <string name="hello_subtitle">Jalur build sudah jalan. Karakter pengingat deadline-mu segera hadir.</string>
-    <string name="info_android">Level API Android: %1$d</string>
-    <string name="overlay_granted">Izin overlay: sudah diberikan</string>
-    <string name="overlay_not_granted">Izin overlay: belum diberikan</string>
+
+    <string name="tab_today">Hari Ini</string>
+    <string name="tab_calendar">Kalender</string>
+    <string name="tab_tasks">Tugas</string>
+    <string name="tab_settings">Pengaturan</string>
+    <string name="placeholder_coming_soon">Segera hadir</string>
+
+    <string name="today_title">Deadline hari ini</string>
+    <string name="tasks_title">Semua tugas</string>
+    <string name="empty_tasks">Belum ada tugas. Yuk catat yang pertama!</string>
+    <string name="empty_today">Tidak ada deadline hari ini. Santai dulu.</string>
+
+    <string name="title_add_task">Tambah tugas</string>
+    <string name="title_edit_task">Ubah tugas</string>
+    <string name="field_title">Judul</string>
+    <string name="field_description">Deskripsi (opsional)</string>
+    <string name="field_deadline">Deadline</string>
+    <string name="field_category">Kategori</string>
+    <string name="field_nag">Ingatkan aku soal tugas ini</string>
+
+    <string name="filter_all">Semua</string>
+    <string name="cat_none">Tanpa kategori</string>
+    <string name="cat_class">Kuliah</string>
+    <string name="cat_club">Organisasi</string>
+    <string name="cat_personal">Pribadi</string>
+    <string name="cat_project">Proyek</string>
+    <string name="cat_exam">Ujian</string>
+    <string name="cat_other">Lainnya</string>
+
+    <string name="task_done">Selesai</string>
+    <string name="time_left">Sisa waktu: %1$s</string>
+    <string name="remaining_dh">%1$d hari %2$d jam</string>
+    <string name="remaining_hm">%1$d jam %2$d mnt</string>
+    <string name="remaining_m">%1$d mnt</string>
+    <string name="remaining_passed">Sudah lewat deadline</string>
+
+    <string name="btn_save">Simpan</string>
+    <string name="btn_save_anyway">Tetap simpan</string>
+    <string name="btn_cancel">Batal</string>
+    <string name="btn_delete">Hapus</string>
+    <string name="btn_ok">OK</string>
+
+    <string name="dialog_delete_title">Hapus tugas ini?</string>
+    <string name="dialog_delete_body">Tugas yang dihapus tidak bisa dikembalikan.</string>
+    <string name="dialog_past_title">Deadline sudah lewat</string>
+    <string name="dialog_past_body">Deadline ini sudah lewat, jadi karakter tidak akan mengingatkan. Tetap simpan?</string>
+
+    <string name="cd_back">Kembali</string>
+    <string name="cd_add">Tambah tugas</string>
+    <string name="cd_delete">Hapus tugas</string>
 </resources>
