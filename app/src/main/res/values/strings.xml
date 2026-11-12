@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">NagMe</string>
+    <string name="hello_title">Hello NagMe!</string>
+    <string name="hello_subtitle">The build pipeline works. Your deadline buddy is coming soon.</string>
+    <string name="info_android">Android API level: %1$d</string>
+    <string name="overlay_granted">Overlay permission: granted</string>
+    <string name="overlay_not_granted">Overlay permission: not granted yet</string>
+</resources>

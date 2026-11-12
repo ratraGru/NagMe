@@ -1,0 +1,52 @@
+name: Build NagMe
+
+on:
+  push:
+    branches: [main, develop]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # Kalau ada file .zip di folder drop/, ekstrak ke root repo lalu hapus zip-nya.
+      - name: Extract zip from drop/
+        run: |
+          shopt -s nullglob
+          zips=(drop/*.zip)
+          if [ ${#zips[@]} -gt 0 ]; then
+            for z in "${zips[@]}"; do
+              echo "Extracting $z"
+              unzip -o "$z" -d .
+              git rm -q -f "$z"
+            done
+            git config user.name "github-actions"
+            git config user.email "github-actions@users.noreply.github.com"
+            git add -A
+            git commit -m "chore: extract drop zip"
+            git push
+          else
+            echo "No zip in drop/, building current repo state."
+          fi
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: 8.10.2
+
+      - name: Build debug APK
+        run: gradle --no-daemon test assembleDebug
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: nagme-debug-apk
+          path: app/build/outputs/apk/debug/app-debug.apk

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">NagMe</string>
+    <string name="hello_title">Halo NagMe!</string>
+    <string name="hello_subtitle">Jalur build sudah jalan. Karakter pengingat deadline-mu segera hadir.</string>
+    <string name="info_android">Level API Android: %1$d</string>
+    <string name="overlay_granted">Izin overlay: sudah diberikan</string>
+    <string name="overlay_not_granted">Izin overlay: belum diberikan</string>
+</resources>
