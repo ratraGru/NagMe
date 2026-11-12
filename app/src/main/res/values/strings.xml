@@ -13,6 +13,9 @@
     <string name="empty_tasks">No tasks yet. Add your first one!</string>
     <string name="empty_today">Nothing due today. Enjoy the calm.</string>
 
+    <string name="cal_today">Today</string>
+    <string name="cal_empty_day">No tasks due on this day.</string>
+
     <string name="title_add_task">Add task</string>
     <string name="title_edit_task">Edit task</string>
     <string name="field_title">Title</string>

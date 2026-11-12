@@ -15,6 +15,9 @@ class TaskRepository(
 ) {
     fun observeAll(): Flow<List<TaskEntity>> = dao.observeAll()
 
+    fun observeBetween(startEpoch: Long, endEpoch: Long): Flow<List<TaskEntity>> =
+        dao.observeBetween(startEpoch, endEpoch)
+
     suspend fun get(id: Long): TaskEntity? = dao.getById(id)
 
     suspend fun add(

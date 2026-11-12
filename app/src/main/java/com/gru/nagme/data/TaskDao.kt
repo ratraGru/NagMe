@@ -12,6 +12,10 @@ interface TaskDao {
     @Query("SELECT * FROM tasks ORDER BY status ASC, deadline_epoch ASC")
     fun observeAll(): Flow<List<TaskEntity>>
 
+    // Marker kalender: tugas dengan deadline di rentang [start, end] (epoch ms).
+    @Query("SELECT * FROM tasks WHERE deadline_epoch BETWEEN :start AND :end ORDER BY deadline_epoch ASC")
+    fun observeBetween(start: Long, end: Long): Flow<List<TaskEntity>>
+
     @Query("SELECT * FROM tasks WHERE id = :id")
     suspend fun getById(id: Long): TaskEntity?
 

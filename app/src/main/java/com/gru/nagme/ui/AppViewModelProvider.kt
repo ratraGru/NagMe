@@ -17,6 +17,10 @@ object AppViewModelProvider {
             val container = nagMeApp().container
             TaskEditViewModel(createSavedStateHandle(), container.taskRepository, container.clock)
         }
+        initializer {
+            val container = nagMeApp().container
+            CalendarViewModel(container.taskRepository, container.clock)
+        }
     }
 }
 

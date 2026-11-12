@@ -13,6 +13,9 @@
     <string name="empty_tasks">Belum ada tugas. Yuk catat yang pertama!</string>
     <string name="empty_today">Tidak ada deadline hari ini. Santai dulu.</string>
 
+    <string name="cal_today">Hari ini</string>
+    <string name="cal_empty_day">Tidak ada deadline di tanggal ini.</string>
+
     <string name="title_add_task">Tambah tugas</string>
     <string name="title_edit_task">Ubah tugas</string>
     <string name="field_title">Judul</string>
