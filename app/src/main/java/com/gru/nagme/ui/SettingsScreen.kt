@@ -39,6 +39,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.LifecycleEventEffect
 import com.gru.nagme.NagMeApp
 import com.gru.nagme.R
+import com.gru.nagme.domain.formatPrecise
 import com.gru.nagme.service.NagNotifier
 
 /**
@@ -133,12 +134,12 @@ fun SettingsScreen(modifier: Modifier = Modifier) {
         )
 
         val nextLine = if (diag.nextTrigger > 0L) {
-            stringResource(R.string.diag_next, formatDeadline(diag.nextTrigger))
+            stringResource(R.string.diag_next, formatPrecise(diag.nextTrigger))
         } else {
             stringResource(R.string.diag_none)
         }
         val lastLine = if (diag.lastAlarm > 0L) {
-            stringResource(R.string.diag_last_alarm, formatDeadline(diag.lastAlarm))
+            stringResource(R.string.diag_last_alarm, formatPrecise(diag.lastAlarm))
         } else {
             stringResource(R.string.diag_last_never)
         }
@@ -150,9 +151,21 @@ fun SettingsScreen(modifier: Modifier = Modifier) {
         val channelLine = stringResource(
             if (diag.channelOk) R.string.diag_channel_ok else R.string.diag_channel_off
         )
+        val scheduleLine = if (diag.scheduleInfo.isNotBlank()) {
+            stringResource(R.string.diag_schedule, diag.scheduleInfo)
+        } else {
+            null
+        }
+        val detailLine = if (diag.lastDetail.isNotBlank()) {
+            stringResource(R.string.diag_detail, diag.lastDetail)
+        } else {
+            null
+        }
         InfoCard(
             title = stringResource(R.string.diag_title),
-            body = listOfNotNull(nextLine, lastLine, resultLine, channelLine).joinToString("\n")
+            body = listOfNotNull(
+                nextLine, scheduleLine, lastLine, resultLine, channelLine, detailLine
+            ).joinToString("\n")
         )
         Button(
             onClick = {
@@ -178,7 +191,9 @@ private data class Diagnostics(
     val lastAlarm: Long,
     val lastDue: Int,
     val lastPosted: Int,
-    val channelOk: Boolean
+    val channelOk: Boolean,
+    val lastDetail: String,
+    val scheduleInfo: String
 )
 
 private fun readDiagnostics(context: Context, app: NagMeApp): Diagnostics {
@@ -188,7 +203,9 @@ private fun readDiagnostics(context: Context, app: NagMeApp): Diagnostics {
         lastAlarm = prefs.lastAlarmEpoch,
         lastDue = prefs.lastDueCount,
         lastPosted = prefs.lastPostedCount,
-        channelOk = NagNotifier.isChannelEnabled(context)
+        channelOk = NagNotifier.isChannelEnabled(context),
+        lastDetail = prefs.lastAlarmDetail,
+        scheduleInfo = prefs.lastScheduleInfo
     )
 }
 

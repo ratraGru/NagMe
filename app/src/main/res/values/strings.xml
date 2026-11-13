@@ -75,6 +75,8 @@
     <string name="diag_none">No reminder scheduled yet.</string>
     <string name="diag_last_alarm">Last alarm received: %1$s</string>
     <string name="diag_last_never">No alarm received yet.</string>
+    <string name="diag_schedule">Last scheduling: %1$s</string>
+    <string name="diag_detail">Last alarm detail:\n%1$s</string>
     <string name="diag_last_result">Last check: %1$d due, %2$d notifications sent</string>
     <string name="diag_channel_ok">Notification channel: on</string>
     <string name="diag_channel_off">Notification channel: BLOCKED (turn it on in the phone\'s notification settings)</string>

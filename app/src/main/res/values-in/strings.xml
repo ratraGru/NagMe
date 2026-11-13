@@ -75,6 +75,8 @@
     <string name="diag_none">Belum ada pengingat terjadwal.</string>
     <string name="diag_last_alarm">Alarm terakhir diterima: %1$s</string>
     <string name="diag_last_never">Belum ada alarm yang diterima.</string>
+    <string name="diag_schedule">Penjadwalan terakhir: %1$s</string>
+    <string name="diag_detail">Detail alarm terakhir:\n%1$s</string>
     <string name="diag_last_result">Pengecekan terakhir: %1$d jatuh tempo, %2$d notifikasi dikirim</string>
     <string name="diag_channel_ok">Saluran notifikasi: aktif</string>
     <string name="diag_channel_off">Saluran notifikasi: DIBLOKIR (aktifkan di pengaturan notifikasi HP)</string>

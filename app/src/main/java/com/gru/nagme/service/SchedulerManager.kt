@@ -9,6 +9,7 @@ import android.util.Log
 import com.gru.nagme.data.TaskRepository
 import com.gru.nagme.domain.Clock
 import com.gru.nagme.domain.NagScheduling
+import com.gru.nagme.domain.formatPrecise
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 
@@ -40,8 +41,10 @@ class SchedulerManager(
             } else {
                 // Jika sudah jatuh tempo, bunyi sebentar lagi (bukan "sekarang juga") agar tidak looping cepat.
                 val at = maxOf(next, now + MIN_DELAY_MS)
-                setAlarm(at)
+                val exact = setAlarm(at)
                 prefs.nextTriggerEpoch = at
+                prefs.lastScheduleInfo =
+                    "set ${formatPrecise(now)} -> fire ${formatPrecise(at)} exact=$exact"
                 Log.d(TAG, "Alarm tunggal dijadwalkan pada $at (dalam ${(at - now) / 1000} dtk)")
             }
         }
@@ -60,18 +63,20 @@ class SchedulerManager(
     fun canScheduleExact(): Boolean =
         Build.VERSION.SDK_INT < Build.VERSION_CODES.S || alarmManager.canScheduleExactAlarms()
 
-    private fun setAlarm(at: Long) {
+    /** Mengembalikan true bila alarm exact yang terpasang, false bila terpaksa alarm biasa. */
+    private fun setAlarm(at: Long): Boolean {
         val pi = pendingIntent()
         if (canScheduleExact()) {
             try {
                 alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, at, pi)
-                return
+                return true
             } catch (e: SecurityException) {
                 Log.w(TAG, "Izin alarm exact dicabut mendadak, pakai alarm biasa", e)
             }
         }
         // Izin ditolak: kurang presisi (bisa terlambat beberapa menit), banner peringatan di app.
         alarmManager.setAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, at, pi)
+        return false
     }
 
     private fun pendingIntent(): PendingIntent {

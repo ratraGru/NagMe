@@ -35,7 +35,23 @@ class SchedulerPrefs(context: Context) {
             prefs.edit().putInt(KEY_LAST_POSTED, value).apply()
         }
 
+    /** Catatan teknis pengecekan alarm terakhir (per tugas: deadline, level, due). */
+    var lastAlarmDetail: String
+        get() = prefs.getString(KEY_LAST_DETAIL, "") ?: ""
+        set(value) {
+            prefs.edit().putString(KEY_LAST_DETAIL, value).apply()
+        }
+
+    /** Catatan penjadwalan alarm terakhir (kapan dipasang, kapan akan berbunyi, exact atau tidak). */
+    var lastScheduleInfo: String
+        get() = prefs.getString(KEY_LAST_SCHEDULE, "") ?: ""
+        set(value) {
+            prefs.edit().putString(KEY_LAST_SCHEDULE, value).apply()
+        }
+
     private companion object {
+        const val KEY_LAST_DETAIL = "last_alarm_detail"
+        const val KEY_LAST_SCHEDULE = "last_schedule_info"
         const val KEY_NEXT_TRIGGER = "next_trigger_epoch"
         const val KEY_LAST_ALARM = "last_alarm_epoch"
         const val KEY_LAST_DUE = "last_due_count"

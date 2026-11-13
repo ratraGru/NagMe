@@ -22,17 +22,20 @@ class AlarmReceiver : BroadcastReceiver() {
         prefs.lastAlarmEpoch = container.clock.now()
         prefs.lastDueCount = -1
         prefs.lastPostedCount = -1
+        prefs.lastAlarmDetail = ""
 
         CoroutineScope(SupervisorJob() + Dispatchers.Default).launch {
             try {
-                val due = container.triggerProcessor.processDue()
+                val result = container.triggerProcessor.processDue()
                 val now = container.clock.now()
                 var posted = 0
-                due.forEach { if (NagNotifier.show(app, it, now)) posted++ }
-                prefs.lastDueCount = due.size
+                result.due.forEach { if (NagNotifier.show(app, it, now)) posted++ }
+                prefs.lastDueCount = result.due.size
                 prefs.lastPostedCount = posted
-                Log.d(TAG, "Alarm diproses, ${due.size} jatuh tempo, $posted notifikasi terkirim")
+                prefs.lastAlarmDetail = result.detail
+                Log.d(TAG, "Alarm diproses, ${result.due.size} jatuh tempo, $posted notifikasi terkirim")
             } catch (t: Throwable) {
+                prefs.lastAlarmDetail = "ERROR: ${t.javaClass.simpleName}: ${t.message}"
                 Log.e(TAG, "Gagal memproses alarm", t)
             } finally {
                 try {
