@@ -73,6 +73,15 @@
     <string name="diag_title">Diagnostik</string>
     <string name="diag_next">Pengingat berikutnya: %1$s</string>
     <string name="diag_none">Belum ada pengingat terjadwal.</string>
+    <string name="diag_last_alarm">Alarm terakhir diterima: %1$s</string>
+    <string name="diag_last_never">Belum ada alarm yang diterima.</string>
+    <string name="diag_last_result">Pengecekan terakhir: %1$d jatuh tempo, %2$d notifikasi dikirim</string>
+    <string name="diag_channel_ok">Saluran notifikasi: aktif</string>
+    <string name="diag_channel_off">Saluran notifikasi: DIBLOKIR (aktifkan di pengaturan notifikasi HP)</string>
+    <string name="btn_test_notif">Kirim notifikasi tes sekarang</string>
+    <string name="toast_notif_off">Notifikasi NagMe dimatikan.</string>
+    <string name="notif_test_title">Tes NagMe</string>
+    <string name="notif_test_body">Kalau ini terlihat, notifikasi berfungsi.</string>
     <string name="tips_oem_title">Tips untuk Nubia dan merek tertentu</string>
     <string name="tips_oem_body">Buka Pengaturan HP &gt; Aplikasi &gt; NagMe, aktifkan Autostart, dan atur pemakaian baterai ke Tanpa batasan. Kalau tidak, sistem bisa mematikan pengingat di latar belakang.</string>
 

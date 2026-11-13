@@ -73,6 +73,15 @@
     <string name="diag_title">Diagnostics</string>
     <string name="diag_next">Next reminder: %1$s</string>
     <string name="diag_none">No reminder scheduled yet.</string>
+    <string name="diag_last_alarm">Last alarm received: %1$s</string>
+    <string name="diag_last_never">No alarm received yet.</string>
+    <string name="diag_last_result">Last check: %1$d due, %2$d notifications sent</string>
+    <string name="diag_channel_ok">Notification channel: on</string>
+    <string name="diag_channel_off">Notification channel: BLOCKED (turn it on in the phone\'s notification settings)</string>
+    <string name="btn_test_notif">Send a test notification now</string>
+    <string name="toast_notif_off">Notifications are turned off for NagMe.</string>
+    <string name="notif_test_title">NagMe test</string>
+    <string name="notif_test_body">If you can see this, notifications work.</string>
     <string name="tips_oem_title">Tip for Nubia and some other brands</string>
     <string name="tips_oem_body">Open the phone\'s Settings &gt; Apps &gt; NagMe, allow Autostart, and set battery usage to Unrestricted. Otherwise the system may stop reminders in the background.</string>
 

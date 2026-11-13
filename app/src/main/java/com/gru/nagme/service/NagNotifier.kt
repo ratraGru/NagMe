@@ -19,6 +19,7 @@ import com.gru.nagme.domain.NagLevel
 object NagNotifier {
     const val CHANNEL_ID = "nag_reminders"
     private const val TAG = "NagNotifier"
+    private const val TEST_NOTIFICATION_ID = Int.MAX_VALUE
 
     fun ensureChannel(context: Context) {
         val channel = NotificationChannel(
@@ -32,11 +33,39 @@ object NagNotifier {
         context.getSystemService(NotificationManager::class.java).createNotificationChannel(channel)
     }
 
-    fun show(context: Context, trigger: DueTrigger, now: Long) {
+    /** False bila saluran notifikasi dimatikan user / sistem (notifikasi tidak akan terlihat). */
+    fun isChannelEnabled(context: Context): Boolean {
+        val channel = context.getSystemService(NotificationManager::class.java)
+            .getNotificationChannel(CHANNEL_ID)
+        return channel == null || channel.importance != NotificationManager.IMPORTANCE_NONE
+    }
+
+    /** Notifikasi uji langsung (tanpa alarm) untuk memastikan jalur notifikasi berfungsi. */
+    fun showTest(context: Context): Boolean {
+        val manager = NotificationManagerCompat.from(context)
+        if (!manager.areNotificationsEnabled()) return false
+        val notification = NotificationCompat.Builder(context, CHANNEL_ID)
+            .setSmallIcon(R.drawable.ic_stat_nag)
+            .setContentTitle(context.getString(R.string.notif_test_title))
+            .setContentText(context.getString(R.string.notif_test_body))
+            .setPriority(NotificationCompat.PRIORITY_HIGH)
+            .setAutoCancel(true)
+            .build()
+        return try {
+            manager.notify(TEST_NOTIFICATION_ID, notification)
+            true
+        } catch (e: SecurityException) {
+            Log.w(TAG, "Tidak punya izin menampilkan notifikasi uji", e)
+            false
+        }
+    }
+
+    /** True bila notifikasi benar-benar dikirim ke sistem. */
+    fun show(context: Context, trigger: DueTrigger, now: Long): Boolean {
         val manager = NotificationManagerCompat.from(context)
         if (!manager.areNotificationsEnabled()) {
             Log.w(TAG, "Notifikasi dimatikan, pengingat untuk '${trigger.task.title}' tidak ditampilkan")
-            return
+            return false
         }
 
         val openApp = PendingIntent.getActivity(
@@ -61,10 +90,12 @@ object NagNotifier {
             .setContentIntent(openApp)
             .build()
 
-        try {
+        return try {
             manager.notify(trigger.task.id.toInt(), notification)
+            true
         } catch (e: SecurityException) {
             Log.w(TAG, "Tidak punya izin menampilkan notifikasi", e)
+            false
         }
     }
 

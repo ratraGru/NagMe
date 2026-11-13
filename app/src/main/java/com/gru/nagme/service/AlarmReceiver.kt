@@ -15,14 +15,23 @@ class AlarmReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
         val app = context.applicationContext as NagMeApp
         val container = app.container
+        val prefs = container.schedulerPrefs
         val pending = goAsync()
+
+        // Catat segera bahwa alarm SAMPAI ke app (untuk layar Diagnostik).
+        prefs.lastAlarmEpoch = container.clock.now()
+        prefs.lastDueCount = -1
+        prefs.lastPostedCount = -1
 
         CoroutineScope(SupervisorJob() + Dispatchers.Default).launch {
             try {
                 val due = container.triggerProcessor.processDue()
                 val now = container.clock.now()
-                due.forEach { NagNotifier.show(app, it, now) }
-                Log.d(TAG, "Alarm diproses, ${due.size} tugas jatuh tempo")
+                var posted = 0
+                due.forEach { if (NagNotifier.show(app, it, now)) posted++ }
+                prefs.lastDueCount = due.size
+                prefs.lastPostedCount = posted
+                Log.d(TAG, "Alarm diproses, ${due.size} jatuh tempo, $posted notifikasi terkirim")
             } catch (t: Throwable) {
                 Log.e(TAG, "Gagal memproses alarm", t)
             } finally {

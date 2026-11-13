@@ -1,7 +1,9 @@
 package com.gru.nagme.ui
 
 import android.Manifest
+import android.content.Context
 import android.os.Build
+import android.widget.Toast
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.Arrangement
@@ -25,7 +27,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableLongStateOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -37,6 +39,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.LifecycleEventEffect
 import com.gru.nagme.NagMeApp
 import com.gru.nagme.R
+import com.gru.nagme.service.NagNotifier
 
 /**
  * S9 + S10 — Pengaturan, Izin & Diagnostik.
@@ -48,9 +51,9 @@ fun SettingsScreen(modifier: Modifier = Modifier) {
     val app = context.applicationContext as NagMeApp
     val status = rememberPermissionStatus()
 
-    var nextTrigger by remember { mutableLongStateOf(app.container.schedulerPrefs.nextTriggerEpoch) }
+    var diag by remember { mutableStateOf(readDiagnostics(context, app)) }
     LifecycleEventEffect(Lifecycle.Event.ON_RESUME) {
-        nextTrigger = app.container.schedulerPrefs.nextTriggerEpoch
+        diag = readDiagnostics(context, app)
     }
 
     // Android 13+: dialog izin notifikasi. Kalau sudah ditolak permanen, arahkan ke pengaturan.
@@ -129,19 +132,64 @@ fun SettingsScreen(modifier: Modifier = Modifier) {
             }
         )
 
+        val nextLine = if (diag.nextTrigger > 0L) {
+            stringResource(R.string.diag_next, formatDeadline(diag.nextTrigger))
+        } else {
+            stringResource(R.string.diag_none)
+        }
+        val lastLine = if (diag.lastAlarm > 0L) {
+            stringResource(R.string.diag_last_alarm, formatDeadline(diag.lastAlarm))
+        } else {
+            stringResource(R.string.diag_last_never)
+        }
+        val resultLine = if (diag.lastDue >= 0) {
+            stringResource(R.string.diag_last_result, diag.lastDue, diag.lastPosted)
+        } else {
+            null
+        }
+        val channelLine = stringResource(
+            if (diag.channelOk) R.string.diag_channel_ok else R.string.diag_channel_off
+        )
         InfoCard(
             title = stringResource(R.string.diag_title),
-            body = if (nextTrigger > 0L) {
-                stringResource(R.string.diag_next, formatDeadline(nextTrigger))
-            } else {
-                stringResource(R.string.diag_none)
-            }
+            body = listOfNotNull(nextLine, lastLine, resultLine, channelLine).joinToString("\n")
         )
+        Button(
+            onClick = {
+                val sent = NagNotifier.showTest(context)
+                if (!sent) {
+                    Toast.makeText(context, R.string.toast_notif_off, Toast.LENGTH_LONG).show()
+                }
+                diag = readDiagnostics(context, app)
+            },
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Text(stringResource(R.string.btn_test_notif))
+        }
         InfoCard(
             title = stringResource(R.string.tips_oem_title),
             body = stringResource(R.string.tips_oem_body)
         )
     }
+}
+
+private data class Diagnostics(
+    val nextTrigger: Long,
+    val lastAlarm: Long,
+    val lastDue: Int,
+    val lastPosted: Int,
+    val channelOk: Boolean
+)
+
+private fun readDiagnostics(context: Context, app: NagMeApp): Diagnostics {
+    val prefs = app.container.schedulerPrefs
+    return Diagnostics(
+        nextTrigger = prefs.nextTriggerEpoch,
+        lastAlarm = prefs.lastAlarmEpoch,
+        lastDue = prefs.lastDueCount,
+        lastPosted = prefs.lastPostedCount,
+        channelOk = NagNotifier.isChannelEnabled(context)
+    )
 }
 
 @Composable
