@@ -40,7 +40,12 @@ import androidx.lifecycle.compose.LifecycleEventEffect
 import com.gru.nagme.NagMeApp
 import com.gru.nagme.R
 import com.gru.nagme.domain.formatPrecise
+import com.gru.nagme.domain.NagLevel
 import com.gru.nagme.service.NagNotifier
+import com.gru.nagme.service.OverlayService
+import android.os.Handler
+import android.os.Looper
+import android.provider.Settings
 
 /**
  * S9 + S10 — Pengaturan, Izin & Diagnostik.
@@ -179,6 +184,7 @@ fun SettingsScreen(modifier: Modifier = Modifier) {
         ) {
             Text(stringResource(R.string.btn_test_notif))
         }
+        CharacterTestCard(context)
         InfoCard(
             title = stringResource(R.string.tips_oem_title),
             body = stringResource(R.string.tips_oem_body)
@@ -291,6 +297,56 @@ private fun InfoCard(title: String, body: String) {
                 style = MaterialTheme.typography.bodyMedium,
                 color = MaterialTheme.colorScheme.onSurface
             )
+        }
+    }
+}
+
+/** Tombol uji karakter per level (versi awal Mode Demo, Bagian 5.7). Muncul 3 detik setelah ditekan. */
+@Composable
+private fun CharacterTestCard(context: Context) {
+    val levels = listOf(
+        NagLevel.CALM to R.string.char_test_l1,
+        NagLevel.WORRIED to R.string.char_test_l2,
+        NagLevel.STRESSED to R.string.char_test_l3,
+        NagLevel.PANIC to R.string.char_test_l4,
+        NagLevel.CRITICAL to R.string.char_test_l5,
+        NagLevel.OVERDUE to R.string.char_test_late
+    )
+    val sample = stringResource(R.string.char_test_task)
+    val lines = listOf(
+        stringResource(R.string.notif_l1, "2h"),
+        stringResource(R.string.notif_l2, "20h"),
+        stringResource(R.string.notif_l3, "10h"),
+        stringResource(R.string.notif_l4, "5h"),
+        stringResource(R.string.notif_l5, "2h"),
+        stringResource(R.string.notif_l6)
+    )
+    InfoCard(
+        title = stringResource(R.string.char_test_title),
+        body = stringResource(R.string.char_test_desc)
+    )
+    levels.chunked(3).forEachIndexed { row, chunk ->
+        Row(horizontalArrangement = Arrangement.spacedBy(8.dp), modifier = Modifier.fillMaxWidth()) {
+            chunk.forEachIndexed { i, (level, label) ->
+                val line = lines[row * 3 + i]
+                Button(
+                    onClick = {
+                        if (!Settings.canDrawOverlays(context)) {
+                            Toast.makeText(context, R.string.toast_overlay_missing, Toast.LENGTH_LONG).show()
+                        } else {
+                            Toast.makeText(context, R.string.toast_char_coming, Toast.LENGTH_SHORT).show()
+                            Handler(Looper.getMainLooper()).postDelayed({
+                                OverlayService.start(
+                                    context.applicationContext, level, OverlayService.TEST_TASK_ID, sample, line
+                                )
+                            }, 3_000L)
+                        }
+                    },
+                    modifier = Modifier.weight(1f)
+                ) {
+                    Text(stringResource(label))
+                }
+            }
         }
     }
 }

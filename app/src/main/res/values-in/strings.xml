@@ -95,4 +95,18 @@
     <string name="notif_l4">Woi. Tinggal %1$s. Gerak.</string>
     <string name="notif_l5">Tinggal %1$s! Gw panik. Lu harus panik juga!</string>
     <string name="notif_l6">Ya udah, deadline-nya lewat. Terserah lu deh.</string>
+
+    <string name="fgs_channel_name">Karakter di layar</string>
+    <string name="fgs_notif_body">Temanmu lagi mampir…</string>
+    <string name="char_test_title">Tes Karakter</string>
+    <string name="char_test_desc">Karakter muncul 3 detik setelah ditekan, jadi kamu bisa pindah ke app lain dulu.</string>
+    <string name="char_test_l1">Level 1</string>
+    <string name="char_test_l2">Level 2</string>
+    <string name="char_test_l3">Level 3</string>
+    <string name="char_test_l4">Level 4</string>
+    <string name="char_test_l5">Level 5</string>
+    <string name="char_test_late">Terlambat</string>
+    <string name="toast_overlay_missing">Aktifkan dulu \"Tampil di atas aplikasi lain\".</string>
+    <string name="toast_char_coming">Pindah ke app mana saja. Karakter muncul dalam 3 detik.</string>
+    <string name="char_test_task">Tugas contoh</string>
 </resources>

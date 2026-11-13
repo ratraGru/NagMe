@@ -95,4 +95,18 @@
     <string name="notif_l4">Panic time. %1$s left. Move!</string>
     <string name="notif_l5">%1$s left! I\'m panicking. You should too!</string>
     <string name="notif_l6">The deadline has passed. Whatever, then.</string>
+
+    <string name="fgs_channel_name">Character on screen</string>
+    <string name="fgs_notif_body">Your buddy is dropping by…</string>
+    <string name="char_test_title">Test character</string>
+    <string name="char_test_desc">Shows the character after 3 seconds, so you can switch to another app first.</string>
+    <string name="char_test_l1">Level 1</string>
+    <string name="char_test_l2">Level 2</string>
+    <string name="char_test_l3">Level 3</string>
+    <string name="char_test_l4">Level 4</string>
+    <string name="char_test_l5">Level 5</string>
+    <string name="char_test_late">Overdue</string>
+    <string name="toast_overlay_missing">Turn on \"Appear on top of other apps\" first.</string>
+    <string name="toast_char_coming">Switch to any app. The character shows up in 3 seconds.</string>
+    <string name="char_test_task">Sample task</string>
 </resources>

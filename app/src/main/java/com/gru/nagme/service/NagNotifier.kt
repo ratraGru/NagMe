@@ -68,20 +68,30 @@ object NagNotifier {
             return false
         }
 
+        return post(context, trigger.task.id.toInt(), trigger.task.title, bodyText(context, trigger, now))
+    }
+
+    /** Teks isi pengingat sesuai level (dipakai notifikasi, overlay, dan nanti TTS). */
+    fun bodyText(context: Context, trigger: DueTrigger, now: Long): String =
+        context.getString(
+            bodyRes(trigger.level),
+            formatRemainingPlain(context, trigger.task.deadlineEpoch - now)
+        )
+
+    /** Kirim notifikasi pengingat biasa. True bila diteruskan ke sistem. */
+    fun post(context: Context, id: Int, title: String, text: String): Boolean {
+        val manager = NotificationManagerCompat.from(context)
+        if (!manager.areNotificationsEnabled()) return false
         val openApp = PendingIntent.getActivity(
             context,
-            trigger.task.id.toInt(),
+            id,
             Intent(context, MainActivity::class.java)
                 .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP),
             PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
         )
-        val text = context.getString(
-            bodyRes(trigger.level),
-            formatRemainingPlain(context, trigger.task.deadlineEpoch - now)
-        )
         val notification = NotificationCompat.Builder(context, CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_stat_nag)
-            .setContentTitle(trigger.task.title)
+            .setContentTitle(title)
             .setContentText(text)
             .setStyle(NotificationCompat.BigTextStyle().bigText(text))
             .setPriority(NotificationCompat.PRIORITY_HIGH)
@@ -91,7 +101,7 @@ object NagNotifier {
             .build()
 
         return try {
-            manager.notify(trigger.task.id.toInt(), notification)
+            manager.notify(id, notification)
             true
         } catch (e: SecurityException) {
             Log.w(TAG, "Tidak punya izin menampilkan notifikasi", e)

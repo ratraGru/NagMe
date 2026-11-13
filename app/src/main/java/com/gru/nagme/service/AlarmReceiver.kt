@@ -29,10 +29,26 @@ class AlarmReceiver : BroadcastReceiver() {
                 val result = container.triggerProcessor.processDue()
                 val now = container.clock.now()
                 var posted = 0
-                result.due.forEach { if (NagNotifier.show(app, it, now)) posted++ }
+                // Level tertinggi tampil sebagai karakter (overlay); sisanya, atau semuanya bila
+                // overlay tidak bisa tampil (izin / layar terkunci), lewat notifikasi (Bagian 6.6).
+                val ordered = result.due.sortedByDescending { it.level.value }
+                val whyNot = OverlayService.whyNot(app)
+                var overlayNote = whyNot?.let { "overlay: skipped ($it)" } ?: "overlay: -"
+                ordered.forEachIndexed { index, trigger ->
+                    var handled = false
+                    if (index == 0 && whyNot == null) {
+                        handled = OverlayService.start(
+                            app, trigger.level, trigger.task.id.toInt(), trigger.task.title,
+                            NagNotifier.bodyText(app, trigger, now)
+                        )
+                        overlayNote = if (handled) "overlay: started L${trigger.level.value}"
+                        else "overlay: start FAILED"
+                    }
+                    if (!handled && NagNotifier.show(app, trigger, now)) posted++
+                }
                 prefs.lastDueCount = result.due.size
                 prefs.lastPostedCount = posted
-                prefs.lastAlarmDetail = result.detail
+                prefs.lastAlarmDetail = result.detail + "\n" + overlayNote
                 Log.d(TAG, "Alarm diproses, ${result.due.size} jatuh tempo, $posted notifikasi terkirim")
             } catch (t: Throwable) {
                 prefs.lastAlarmDetail = "ERROR: ${t.javaClass.simpleName}: ${t.message}"
