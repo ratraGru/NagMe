@@ -22,10 +22,12 @@ import com.gru.nagme.data.TaskStatus
 @Composable
 fun TodayScreen(
     onEditTask: (Long) -> Unit,
+    onOpenPermissions: () -> Unit,
     modifier: Modifier = Modifier,
     viewModel: TaskListViewModel = viewModel(factory = AppViewModelProvider.Factory)
 ) {
     val state by viewModel.uiState.collectAsStateWithLifecycle()
+    val permissions = rememberPermissionStatus()
     val now = viewModel.now()
     val today = state.allTasks.filter {
         it.status == TaskStatus.ACTIVE && isSameDay(it.deadlineEpoch, now)
@@ -38,6 +40,12 @@ fun TodayScreen(
             color = MaterialTheme.colorScheme.onBackground,
             modifier = Modifier.padding(start = 16.dp, top = 16.dp, end = 16.dp, bottom = 8.dp)
         )
+        if (permissions.criticalMissing) {
+            PermissionBanner(
+                onClick = onOpenPermissions,
+                modifier = Modifier.padding(horizontal = 16.dp, vertical = 4.dp)
+            )
+        }
         if (today.isEmpty()) {
             EmptyState(R.string.empty_today)
         } else {

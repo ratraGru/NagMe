@@ -8,10 +8,14 @@ import kotlinx.coroutines.flow.Flow
  * Semua akses data tugas lewat sini (Bagian 7.1 A2).
  * Aturan 6.7: tugas baru / deadline diedit => last_triggered_level = level saat ini,
  * supaya level yang sedang berjalan tidak langsung memicu karakter.
+ *
+ * [onChanged] dipanggil setelah user membuat/mengubah/menghapus/menyelesaikan tugas,
+ * dipakai untuk menghitung ulang 1 alarm terdekat (Bagian 6.1).
  */
 class TaskRepository(
     private val dao: TaskDao,
-    private val clock: Clock
+    private val clock: Clock,
+    private val onChanged: suspend () -> Unit = {}
 ) {
     fun observeAll(): Flow<List<TaskEntity>> = dao.observeAll()
 
@@ -19,6 +23,9 @@ class TaskRepository(
         dao.observeBetween(startEpoch, endEpoch)
 
     suspend fun get(id: Long): TaskEntity? = dao.getById(id)
+
+    /** Tugas aktif dengan nag menyala — bahan hitung alarm berikutnya. */
+    suspend fun getActiveNagTasks(): List<TaskEntity> = dao.getActiveNagTasks()
 
     suspend fun add(
         title: String,
@@ -28,7 +35,7 @@ class TaskRepository(
         nagEnabled: Boolean
     ): Long {
         val now = clock.now()
-        return dao.insert(
+        val id = dao.insert(
             TaskEntity(
                 title = title.trim(),
                 description = description?.trim()?.ifBlank { null },
@@ -40,6 +47,8 @@ class TaskRepository(
                 lastTriggeredLevel = NagLevelResolver.resolve(deadlineEpoch, now).value
             )
         )
+        onChanged()
+        return id
     }
 
     suspend fun edit(
@@ -69,9 +78,13 @@ class TaskRepository(
                 }
             )
         )
+        onChanged()
     }
 
-    suspend fun delete(task: TaskEntity) = dao.delete(task)
+    suspend fun delete(task: TaskEntity) {
+        dao.delete(task)
+        onChanged()
+    }
 
     suspend fun setCompleted(task: TaskEntity, completed: Boolean) {
         val now = clock.now()
@@ -88,5 +101,15 @@ class TaskRepository(
                 }
             )
         )
+        onChanged()
+    }
+
+    /**
+     * Dipanggil penerima alarm setelah sebuah level ditampilkan: catat level terakhir
+     * dan bersihkan snooze yang sudah habis. TIDAK memanggil [onChanged] — penerima alarm
+     * menghitung ulang alarm sekali di akhir.
+     */
+    suspend fun markTriggered(task: TaskEntity, level: Int) {
+        dao.update(task.copy(lastTriggeredLevel = level, snoozeUntilEpoch = 0))
     }
 }

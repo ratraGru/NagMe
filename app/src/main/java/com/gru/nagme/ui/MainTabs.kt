@@ -65,10 +65,14 @@ fun MainTabs(
     ) { innerPadding ->
         val contentModifier = Modifier.padding(innerPadding)
         when (selectedTab) {
-            0 -> TodayScreen(onEditTask = onEditTask, modifier = contentModifier)
+            0 -> TodayScreen(
+                onEditTask = onEditTask,
+                onOpenPermissions = { selectedTab = 3 },
+                modifier = contentModifier
+            )
             1 -> CalendarScreen(onEditTask = onEditTask, modifier = contentModifier)
             2 -> TaskListScreen(onEditTask = onEditTask, modifier = contentModifier)
-            else -> PlaceholderScreen(R.string.tab_settings, contentModifier)
+            else -> SettingsScreen(modifier = contentModifier)
         }
     }
 }

@@ -54,4 +54,34 @@
     <string name="cd_back">Kembali</string>
     <string name="cd_add">Tambah tugas</string>
     <string name="cd_delete">Hapus tugas</string>
+
+    <string name="settings_title">Pengaturan</string>
+    <string name="perm_section_title">Izin &amp; diagnostik</string>
+    <string name="perm_intro">Karakter butuh izin ini supaya bisa mengingatkanmu tepat waktu. Tiap tombol membuka pengaturan sistem.</string>
+    <string name="perm_overlay_title">Tampil di atas aplikasi lain</string>
+    <string name="perm_overlay_desc">Biar karakter bisa nongol di atas TikTok, WhatsApp, dan lainnya.</string>
+    <string name="perm_alarm_title">Alarm tepat waktu</string>
+    <string name="perm_alarm_desc">Membangunkan app tepat di waktu pengingat, bahkan saat HP sedang diam.</string>
+    <string name="perm_notif_title">Notifikasi</string>
+    <string name="perm_notif_desc">Dipakai sebagai cadangan kalau karakter tidak bisa muncul (misalnya di layar terkunci).</string>
+    <string name="perm_battery_title">Baterai tanpa batasan (disarankan)</string>
+    <string name="perm_battery_desc">Supaya HP tidak mematikan NagMe di latar belakang.</string>
+    <string name="perm_granted">Sudah diberikan</string>
+    <string name="perm_missing">Belum diberikan</string>
+    <string name="btn_enable">Aktifkan</string>
+    <string name="banner_permissions">Karakter belum bisa nongol. Ketuk untuk aktifkan.</string>
+    <string name="diag_title">Diagnostik</string>
+    <string name="diag_next">Pengingat berikutnya: %1$s</string>
+    <string name="diag_none">Belum ada pengingat terjadwal.</string>
+    <string name="tips_oem_title">Tips untuk Nubia dan merek tertentu</string>
+    <string name="tips_oem_body">Buka Pengaturan HP &gt; Aplikasi &gt; NagMe, aktifkan Autostart, dan atur pemakaian baterai ke Tanpa batasan. Kalau tidak, sistem bisa mematikan pengingat di latar belakang.</string>
+
+    <string name="channel_name">Pengingat deadline</string>
+    <string name="channel_desc">Pengingat saat deadline tugas mendekat</string>
+    <string name="notif_l1">Santai, masih ada %1$s. Tapi jangan lupa ya.</string>
+    <string name="notif_l2">Tinggal %1$s lagi lho. Udah mulai belum?</string>
+    <string name="notif_l3">Udah mepet, tinggal %1$s!</string>
+    <string name="notif_l4">Woi. Tinggal %1$s. Gerak.</string>
+    <string name="notif_l5">Tinggal %1$s! Gw panik. Lu harus panik juga!</string>
+    <string name="notif_l6">Ya udah, deadline-nya lewat. Terserah lu deh.</string>
 </resources>

@@ -54,4 +54,34 @@
     <string name="cd_back">Back</string>
     <string name="cd_add">Add task</string>
     <string name="cd_delete">Delete task</string>
+
+    <string name="settings_title">Settings</string>
+    <string name="perm_section_title">Permissions &amp; diagnostics</string>
+    <string name="perm_intro">Your buddy needs these to reach you on time. Each button opens the system settings.</string>
+    <string name="perm_overlay_title">Appear on top of other apps</string>
+    <string name="perm_overlay_desc">Lets the character pop up over TikTok, WhatsApp, and more.</string>
+    <string name="perm_alarm_title">Exact alarms</string>
+    <string name="perm_alarm_desc">Wakes the app at the exact reminder time, even when the phone is idle.</string>
+    <string name="perm_notif_title">Notifications</string>
+    <string name="perm_notif_desc">Used as the backup when the character can\'t show up (for example on a locked screen).</string>
+    <string name="perm_battery_title">Unrestricted battery (recommended)</string>
+    <string name="perm_battery_desc">Stops the phone from putting NagMe to sleep in the background.</string>
+    <string name="perm_granted">Granted</string>
+    <string name="perm_missing">Not granted</string>
+    <string name="btn_enable">Enable</string>
+    <string name="banner_permissions">Your buddy can\'t reach you yet. Tap to fix permissions.</string>
+    <string name="diag_title">Diagnostics</string>
+    <string name="diag_next">Next reminder: %1$s</string>
+    <string name="diag_none">No reminder scheduled yet.</string>
+    <string name="tips_oem_title">Tip for Nubia and some other brands</string>
+    <string name="tips_oem_body">Open the phone\'s Settings &gt; Apps &gt; NagMe, allow Autostart, and set battery usage to Unrestricted. Otherwise the system may stop reminders in the background.</string>
+
+    <string name="channel_name">Deadline reminders</string>
+    <string name="channel_desc">Reminders when a task deadline gets close</string>
+    <string name="notif_l1">Easy now, you still have %1$s. Just don\'t forget!</string>
+    <string name="notif_l2">Only %1$s left. Started yet?</string>
+    <string name="notif_l3">Getting tight: %1$s left!</string>
+    <string name="notif_l4">Panic time. %1$s left. Move!</string>
+    <string name="notif_l5">%1$s left! I\'m panicking. You should too!</string>
+    <string name="notif_l6">The deadline has passed. Whatever, then.</string>
 </resources>
