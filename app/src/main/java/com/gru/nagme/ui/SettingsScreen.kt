@@ -337,7 +337,8 @@ private fun CharacterTestCard(context: Context) {
                             Toast.makeText(context, R.string.toast_char_coming, Toast.LENGTH_SHORT).show()
                             Handler(Looper.getMainLooper()).postDelayed({
                                 OverlayService.start(
-                                    context.applicationContext, level, OverlayService.TEST_TASK_ID, sample, line
+                                    context.applicationContext, level, OverlayService.TEST_TASK_ID, sample, line,
+                                    com.gru.nagme.domain.NagScheduling.thresholdMs(level)
                                 )
                             }, 3_000L)
                         }

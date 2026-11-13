@@ -109,4 +109,7 @@
     <string name="toast_overlay_missing">Aktifkan dulu \"Tampil di atas aplikasi lain\".</string>
     <string name="toast_char_coming">Pindah ke app mana saja. Karakter muncul dalam 3 detik.</string>
     <string name="char_test_task">Tugas contoh</string>
+    <string name="overlay_menu_done">Selesai</string>
+    <string name="overlay_menu_snooze">Tunda</string>
+    <string name="overlay_menu_open">Buka app</string>
 </resources>

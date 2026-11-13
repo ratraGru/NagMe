@@ -109,4 +109,7 @@
     <string name="toast_overlay_missing">Turn on \"Appear on top of other apps\" first.</string>
     <string name="toast_char_coming">Switch to any app. The character shows up in 3 seconds.</string>
     <string name="char_test_task">Sample task</string>
+    <string name="overlay_menu_done">Done</string>
+    <string name="overlay_menu_snooze">Snooze</string>
+    <string name="overlay_menu_open">Open app</string>
 </resources>
