@@ -20,14 +20,18 @@ class TriggerProcessor(
 ) {
     suspend fun processDue(): ProcessResult {
         val now = clock.now()
+        // Toleransi: alarm yang berbunyi sedikit lebih awal dari jadwalnya tetap dianggap jatuh tempo.
+        // "cur" di catatan memakai waktu asli, jadi alarm yang bunyi kecepatan terlihat: cur=L5 tetapi due=6.
+        val effectiveNow = now + EARLY_SLACK_MS
         val tasks = repository.getActiveNagTasks()
         val due = ArrayList<DueTrigger>()
         val detail = StringBuilder("now=").append(formatPrecise(now))
+            .append(" (+").append(EARLY_SLACK_MS).append("ms slack)")
 
         if (tasks.isEmpty()) detail.append("\n(no active tasks)")
 
         for (task in tasks) {
-            val level = NagScheduling.dueLevel(task, now)
+            val level = NagScheduling.dueLevel(task, effectiveNow)
             if (detail.count { it == '\n' } < MAX_DETAIL_TASKS) {
                 detail.append('\n')
                     .append(task.title.take(12))
@@ -45,5 +49,6 @@ class TriggerProcessor(
 
     private companion object {
         const val MAX_DETAIL_TASKS = 4
+        const val EARLY_SLACK_MS = 5_000L
     }
 }
