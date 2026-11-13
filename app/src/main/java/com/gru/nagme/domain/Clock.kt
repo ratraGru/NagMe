@@ -8,3 +8,8 @@ fun interface Clock {
 object RealClock : Clock {
     override fun now(): Long = System.currentTimeMillis()
 }
+
+/** Jam asli + selisih simulasi (Mode Demo "Majukan waktu"). Selisih 0 = sama dengan jam asli. */
+class SimClock(private val offsetMs: () -> Long) : Clock {
+    override fun now(): Long = System.currentTimeMillis() + offsetMs()
+}

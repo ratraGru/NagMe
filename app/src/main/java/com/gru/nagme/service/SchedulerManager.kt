@@ -21,7 +21,9 @@ class SchedulerManager(
     context: Context,
     private val repository: TaskRepository,
     private val clock: Clock,
-    private val prefs: SchedulerPrefs
+    private val prefs: SchedulerPrefs,
+    /** Selisih jam simulasi (Mode Demo); AlarmManager tetap memakai waktu asli. */
+    private val offsetMs: () -> Long = { 0L }
 ) {
     private val appContext = context.applicationContext
     private val alarmManager = appContext.getSystemService(Context.ALARM_SERVICE) as AlarmManager
@@ -41,7 +43,8 @@ class SchedulerManager(
             } else {
                 // Jika sudah jatuh tempo, bunyi sebentar lagi (bukan "sekarang juga") agar tidak looping cepat.
                 val at = maxOf(next, now + MIN_DELAY_MS)
-                val exact = setAlarm(at)
+                val realAt = maxOf(at - offsetMs(), System.currentTimeMillis() + MIN_DELAY_MS)
+                val exact = setAlarm(realAt)
                 prefs.nextTriggerEpoch = at
                 prefs.lastScheduleInfo =
                     "set ${formatPrecise(now)} -> fire ${formatPrecise(at)} exact=$exact"

@@ -2,6 +2,7 @@ package com.gru.nagme.data
 
 import com.gru.nagme.domain.Clock
 import com.gru.nagme.domain.NagLevelResolver
+import com.gru.nagme.domain.NagScheduling
 import kotlinx.coroutines.flow.Flow
 
 /**
@@ -78,6 +79,23 @@ class TaskRepository(
                 }
             )
         )
+        onChanged()
+    }
+
+    /** Snooze +10 menit (Bagian 6.4). Mengembalikan hitungan snooze yang baru. */
+    suspend fun snooze(task: TaskEntity): Int {
+        val now = clock.now()
+        val count = task.snoozeCount + 1
+        dao.update(
+            task.copy(snoozeCount = count, snoozeUntilEpoch = now + NagScheduling.SNOOZE_MS, updatedAt = now)
+        )
+        onChanged()
+        return count
+    }
+
+    /** Mode Demo: hapus semua tugas. */
+    suspend fun deleteAll() {
+        dao.deleteAll()
         onChanged()
     }
 

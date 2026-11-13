@@ -5,7 +5,8 @@ import androidx.room.Room
 import com.gru.nagme.data.AppDatabase
 import com.gru.nagme.data.TaskRepository
 import com.gru.nagme.domain.Clock
-import com.gru.nagme.domain.RealClock
+import com.gru.nagme.domain.SimClock
+import com.gru.nagme.data.SettingsPrefs
 import com.gru.nagme.service.SchedulerManager
 import com.gru.nagme.service.SchedulerPrefs
 import com.gru.nagme.service.TriggerProcessor
@@ -17,7 +18,8 @@ import kotlinx.coroutines.SupervisorJob
 class AppContainer(context: Context) {
     private val appContext = context.applicationContext
 
-    val clock: Clock = RealClock
+    val settings = SettingsPrefs(appContext)
+    val clock: Clock = SimClock { settings.simOffsetMs }
     val appScope = CoroutineScope(SupervisorJob() + Dispatchers.Default)
 
     private val database: AppDatabase = Room
@@ -33,7 +35,7 @@ class AppContainer(context: Context) {
     }
 
     val scheduler: SchedulerManager by lazy {
-        SchedulerManager(appContext, taskRepository, clock, schedulerPrefs)
+        SchedulerManager(appContext, taskRepository, clock, schedulerPrefs) { settings.simOffsetMs }
     }
 
     val triggerProcessor: TriggerProcessor by lazy {

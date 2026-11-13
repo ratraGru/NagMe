@@ -3,68 +3,23 @@ package com.gru.nagme.service
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
-import android.util.Log
 import com.gru.nagme.NagMeApp
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
 
-/** Menerima broadcast dari AlarmManager (alarm tunggal). Alur: Bagian 6.1 langkah 4-9. */
+/** Menerima broadcast dari AlarmManager (alarm tunggal). Isinya ada di [AlarmProcessor]. */
 class AlarmReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
         val app = context.applicationContext as NagMeApp
-        val container = app.container
-        val prefs = container.schedulerPrefs
         val pending = goAsync()
-
-        // Catat segera bahwa alarm SAMPAI ke app (untuk layar Diagnostik).
-        prefs.lastAlarmEpoch = container.clock.now()
-        prefs.lastDueCount = -1
-        prefs.lastPostedCount = -1
-        prefs.lastAlarmDetail = ""
-
         CoroutineScope(SupervisorJob() + Dispatchers.Default).launch {
             try {
-                val result = container.triggerProcessor.processDue()
-                val now = container.clock.now()
-                var posted = 0
-                // Level tertinggi tampil sebagai karakter (overlay); sisanya, atau semuanya bila
-                // overlay tidak bisa tampil (izin / layar terkunci), lewat notifikasi (Bagian 6.6).
-                val ordered = result.due.sortedByDescending { it.level.value }
-                val whyNot = OverlayService.whyNot(app)
-                var overlayNote = whyNot?.let { "overlay: skipped ($it)" } ?: "overlay: -"
-                ordered.forEachIndexed { index, trigger ->
-                    var handled = false
-                    if (index == 0 && whyNot == null) {
-                        handled = OverlayService.start(
-                            app, trigger.level, trigger.task.id.toInt(), trigger.task.title,
-                            NagNotifier.bodyText(app, trigger, now)
-                        )
-                        overlayNote = if (handled) "overlay: started L${trigger.level.value}"
-                        else "overlay: start FAILED"
-                    }
-                    if (!handled && NagNotifier.show(app, trigger, now)) posted++
-                }
-                prefs.lastDueCount = result.due.size
-                prefs.lastPostedCount = posted
-                prefs.lastAlarmDetail = result.detail + "\n" + overlayNote
-                Log.d(TAG, "Alarm diproses, ${result.due.size} jatuh tempo, $posted notifikasi terkirim")
-            } catch (t: Throwable) {
-                prefs.lastAlarmDetail = "ERROR: ${t.javaClass.simpleName}: ${t.message}"
-                Log.e(TAG, "Gagal memproses alarm", t)
+                AlarmProcessor.runAndReschedule(app)
             } finally {
-                try {
-                    container.scheduler.scheduleNext()
-                } catch (t: Throwable) {
-                    Log.e(TAG, "Gagal menjadwalkan alarm berikutnya", t)
-                }
                 pending.finish()
             }
         }
-    }
-
-    private companion object {
-        const val TAG = "AlarmReceiver"
     }
 }

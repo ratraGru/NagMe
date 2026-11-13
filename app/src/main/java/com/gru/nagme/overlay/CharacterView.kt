@@ -24,6 +24,9 @@ class CharacterView(context: Context) : View(context) {
 
     var level: NagLevel = NagLevel.CALM
         set(value) { field = value; invalidate() }
+    /** Ekspresi senang (tugas selesai) — menggantikan ekspresi level. */
+    var celebrate: Boolean = false
+        set(value) { field = value; invalidate() }
     var line: String = ""
         set(value) { field = value; invalidate() }
 
@@ -64,7 +67,7 @@ class CharacterView(context: Context) : View(context) {
         super.onDetachedFromWindow()
     }
 
-    private fun bodyColor(): Int = when (level) {
+    private fun bodyColor(): Int = if (celebrate) 0xFFBFE8D4.toInt() else when (level) {
         NagLevel.DORMANT, NagLevel.CALM -> 0xFFBFE8D4.toInt()   // mint
         NagLevel.WORRIED -> 0xFFF3E6A8.toInt()                  // krem kuning
         NagLevel.STRESSED -> 0xFFF8CDA6.toInt()                 // peach
@@ -81,8 +84,8 @@ class CharacterView(context: Context) : View(context) {
         drawBubble(canvas, w, bubbleH)
 
         val t = phase * 2f * PI.toFloat()
-        val shaky = level == NagLevel.PANIC || level == NagLevel.CRITICAL
-        val bob = sin(t) * dp(if (shaky) 2f else 3f)
+        val shaky = !celebrate && (level == NagLevel.PANIC || level == NagLevel.CRITICAL)
+        val bob = sin(t) * dp(if (celebrate) 8f else if (shaky) 2f else 3f)
         val shake = if (shaky) sin(t * 6f) * dp(if (level == NagLevel.CRITICAL) 4f else 2f) else 0f
 
         val areaTop = bubbleH + dp(10f)
@@ -132,6 +135,17 @@ class CharacterView(context: Context) : View(context) {
         val eyeDx = r * 0.36f
         val eyeY = cy - r * 0.10f
         val lw = outline.strokeWidth
+        if (celebrate) {
+            // mata tertutup senyum ^ ^, senyum lebar, pipi merona
+            for (sx in floatArrayOf(-eyeDx, eyeDx)) {
+                val ex = cx + sx
+                c.drawArc(RectF(ex - r * 0.15f, eyeY - r * 0.10f, ex + r * 0.15f, eyeY + r * 0.20f), 180f, 180f, false, outlineNoFill())
+            }
+            smile(c, cx, cy + r * 0.22f, r * 0.34f, 1.6f)
+            cheeks(c, cx, cy + r * 0.20f, r)
+            outline.strokeWidth = lw
+            return
+        }
         when (level) {
             NagLevel.DORMANT, NagLevel.CALM -> {
                 eye(c, cx - eyeDx, eyeY, r * 0.13f, r * 0.06f)
