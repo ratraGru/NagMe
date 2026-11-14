@@ -184,6 +184,8 @@ fun SettingsScreen(modifier: Modifier = Modifier) {
         ) {
             Text(stringResource(R.string.btn_test_notif))
         }
+        UserSettingsCard()
+        DemoModeCard()
         CharacterTestCard(context)
         InfoCard(
             title = stringResource(R.string.tips_oem_title),
