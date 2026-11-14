@@ -137,4 +137,10 @@
     <string name="dummy_4">Belajar kuis Matematika</string>
     <string name="dummy_5">Baca bab 5</string>
     <string name="dummy_6">Rapikan catatan</string>
+    <string name="ob_welcome_title">Kenalan sama temen cerewetmu</string>
+    <string name="ob_welcome_body">NagMe muncul di layar saat deadline makin dekat, dan makin lama makin panik. Yuk atur 3 izin singkat supaya dia bisa menjangkau lu.</string>
+    <string name="ob_skip">Lewati</string>
+    <string name="ob_next">Lanjut</string>
+    <string name="ob_done">Selesai</string>
+    <string name="ob_step">%1$d dari %2$d</string>
 </resources>

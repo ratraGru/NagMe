@@ -43,7 +43,14 @@ class SettingsPrefs(context: Context) {
         get() = prefs.getLong(KEY_SIM_OFFSET, 0L)
         set(v) { prefs.edit().putLong(KEY_SIM_OFFSET, v).apply() }
 
+    /** True setelah onboarding selesai atau dilewati. */
+    var onboardingDone: Boolean
+        get() = prefs.getBoolean(KEY_ONBOARDING, false)
+        set(v) { prefs.edit().putBoolean(KEY_ONBOARDING, v).apply() }
+
     companion object {
+        private const val KEY_ONBOARDING = "onboarding_done"
+
         const val PACK_CALM = "calm"
         const val PACK_DRAMATIC = "dramatic"
         private const val KEY_MASTER = "master"

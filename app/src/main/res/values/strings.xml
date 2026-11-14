@@ -137,4 +137,10 @@
     <string name="dummy_4">Math quiz prep</string>
     <string name="dummy_5">Read chapter 5</string>
     <string name="dummy_6">Organize notes</string>
+    <string name="ob_welcome_title">Meet your nagging buddy</string>
+    <string name="ob_welcome_body">NagMe pops up on your screen as your deadline gets closer, and gets more and more worried. Let\'s set up 3 quick permissions so it can reach you.</string>
+    <string name="ob_skip">Skip</string>
+    <string name="ob_next">Next</string>
+    <string name="ob_done">Done</string>
+    <string name="ob_step">%1$d of %2$d</string>
 </resources>
