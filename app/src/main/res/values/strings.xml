@@ -113,7 +113,7 @@
     <string name="overlay_menu_snooze">Snooze</string>
     <string name="overlay_menu_open">Open app</string>
     <string name="set_title">Settings</string>
-    <string name="set_master">Character & reminders (master switch)</string>
+    <string name="set_master">Character &amp; reminders (master switch)</string>
     <string name="set_volume">Volume: %1$d%%</string>
     <string name="set_size">Character size: %1$d dp</string>
     <string name="set_alarm_stream">Play voice on alarm channel (works in silent mode)</string>

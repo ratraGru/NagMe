@@ -113,7 +113,7 @@
     <string name="overlay_menu_snooze">Tunda</string>
     <string name="overlay_menu_open">Buka app</string>
     <string name="set_title">Pengaturan</string>
-    <string name="set_master">Karakter & pengingat (saklar utama)</string>
+    <string name="set_master">Karakter &amp; pengingat (saklar utama)</string>
     <string name="set_volume">Volume: %1$d%%</string>
     <string name="set_size">Ukuran karakter: %1$d dp</string>
     <string name="set_alarm_stream">Suara lewat jalur alarm (tetap bunyi saat mode senyap)</string>
