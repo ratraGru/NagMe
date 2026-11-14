@@ -69,6 +69,7 @@ fun UserSettingsCard() {
 
     var master by remember { mutableStateOf(s.masterEnabled) }
     var alarmStream by remember { mutableStateOf(s.useAlarmStream) }
+    var character by remember { mutableStateOf(s.characterStyle) }
     var pack by remember { mutableStateOf(s.voicePack) }
     var volume by remember { mutableFloatStateOf(s.volume.toFloat()) }
     var size by remember { mutableFloatStateOf(s.sizeDp.toFloat()) }
@@ -83,6 +84,16 @@ fun UserSettingsCard() {
     val levelState = remember { levels.map { (l, _) -> mutableStateOf(s.isLevelEnabled(l)) } }
 
     SectionCard(stringResource(R.string.set_title)) {
+        Text(stringResource(R.string.set_character), style = MaterialTheme.typography.bodyMedium)
+        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            listOf(R.string.char_blobby, R.string.char_cat, R.string.char_bunny).forEachIndexed { i, name ->
+                FilterChip(
+                    selected = character == i,
+                    onClick = { character = i; s.characterStyle = i },
+                    label = { Text(stringResource(name)) }
+                )
+            }
+        }
         SwitchRow(stringResource(R.string.set_master), master) { master = it; s.masterEnabled = it }
         levels.forEachIndexed { i, (level, label) ->
             SwitchRow(stringResource(label), levelState[i].value) {

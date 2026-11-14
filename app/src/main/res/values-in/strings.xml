@@ -143,4 +143,8 @@
     <string name="ob_next">Lanjut</string>
     <string name="ob_done">Selesai</string>
     <string name="ob_step">%1$d dari %2$d</string>
+    <string name="set_character">Karakter (coba lewat Tes Karakter di bawah)</string>
+    <string name="char_blobby">Blobby</string>
+    <string name="char_cat">Kucing</string>
+    <string name="char_bunny">Kelinci</string>
 </resources>

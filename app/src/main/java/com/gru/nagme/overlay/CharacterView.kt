@@ -29,6 +29,9 @@ class CharacterView(context: Context) : View(context) {
         set(value) { field = value; invalidate() }
     var line: String = ""
         set(value) { field = value; invalidate() }
+    /** 0 = Blobby (polos), 1 = Kucing (telinga segitiga), 2 = Kelinci (telinga panjang). */
+    var style: Int = 0
+        set(value) { field = value; invalidate() }
 
     private val density = resources.displayMetrics.density
     private fun dp(v: Float) = v * density
@@ -89,19 +92,45 @@ class CharacterView(context: Context) : View(context) {
         val shake = if (shaky) sin(t * 6f) * dp(if (level == NagLevel.CRITICAL) 4f else 2f) else 0f
 
         val areaTop = bubbleH + dp(10f)
-        val bodyH = (h - areaTop).coerceAtLeast(dp(60f)) * 0.92f
+        // Karakter bertelinga dikecilkan sedikit supaya telinganya tidak menabrak balon ucapan.
+        val bodyH = (h - areaTop).coerceAtLeast(dp(60f)) * (if (style == 0) 0.92f else 0.78f)
         val bodyW = bodyH * 1.05f
         val cx = w / 2f + shake
         val cy = areaTop + (h - areaTop) / 2f + bob
         body.set(cx - bodyW / 2f, cy - bodyH / 2f, cx + bodyW / 2f, cy + bodyH / 2f)
 
         fill.color = bodyColor()
+        drawEars(canvas, cx, bodyW, bodyH)
         canvas.drawOval(body, fill)
         canvas.drawOval(body, outline)
 
         // Wajah: koordinat relatif terhadap pusat badan, satuan r.
         val r = bodyW / 2f
         drawFace(canvas, cx, cy, r)
+    }
+
+    /** Telinga digambar sebelum badan, jadi pangkalnya tertutup badan. */
+    private fun drawEars(c: Canvas, cx: Float, bodyW: Float, bodyH: Float) {
+        if (style == 0) return
+        val top = body.top
+        for (dir in floatArrayOf(-1f, 1f)) {
+            if (style == 1) {
+                path.reset()
+                path.moveTo(cx + dir * bodyW * 0.40f, top + bodyH * 0.28f)
+                path.lineTo(cx + dir * bodyW * 0.30f, top - bodyH * 0.14f)
+                path.lineTo(cx + dir * bodyW * 0.06f, top + bodyH * 0.06f)
+                path.close()
+                c.drawPath(path, fill)
+                c.drawPath(path, outline)
+            } else {
+                val ear = RectF(
+                    cx + dir * bodyW * 0.27f - bodyW * 0.11f, top - bodyH * 0.26f,
+                    cx + dir * bodyW * 0.27f + bodyW * 0.11f, top + bodyH * 0.14f
+                )
+                c.drawOval(ear, fill)
+                c.drawOval(ear, outline)
+            }
+        }
     }
 
     private fun drawBubble(canvas: Canvas, w: Float, bubbleH: Float) {

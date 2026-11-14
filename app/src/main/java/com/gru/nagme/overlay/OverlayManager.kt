@@ -21,6 +21,7 @@ import android.widget.FrameLayout
 import android.widget.LinearLayout
 import android.widget.TextView
 import com.gru.nagme.R
+import com.gru.nagme.data.SettingsPrefs
 import com.gru.nagme.domain.NagLevel
 
 /** Aksi di mini menu (tekan lama pada karakter) — Bagian 5.4. */
@@ -78,6 +79,7 @@ class OverlayManager(context: Context) {
             this.level = level
             this.celebrate = celebrate
             this.line = line
+            this.style = SettingsPrefs(appContext).characterStyle
             setOnClickListener { hide() }
         }
         val frame = FrameLayout(appContext)

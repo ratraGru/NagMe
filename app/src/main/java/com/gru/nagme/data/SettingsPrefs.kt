@@ -43,12 +43,18 @@ class SettingsPrefs(context: Context) {
         get() = prefs.getLong(KEY_SIM_OFFSET, 0L)
         set(v) { prefs.edit().putLong(KEY_SIM_OFFSET, v).apply() }
 
+    /** Karakter aktif: 0 Blobby, 1 Kucing, 2 Kelinci (Galeri Karakter, Bagian 5.6). */
+    var characterStyle: Int
+        get() = prefs.getInt(KEY_CHARACTER, 0).coerceIn(0, 2)
+        set(v) { prefs.edit().putInt(KEY_CHARACTER, v.coerceIn(0, 2)).apply() }
+
     /** True setelah onboarding selesai atau dilewati. */
     var onboardingDone: Boolean
         get() = prefs.getBoolean(KEY_ONBOARDING, false)
         set(v) { prefs.edit().putBoolean(KEY_ONBOARDING, v).apply() }
 
     companion object {
+        private const val KEY_CHARACTER = "character_style"
         private const val KEY_ONBOARDING = "onboarding_done"
 
         const val PACK_CALM = "calm"

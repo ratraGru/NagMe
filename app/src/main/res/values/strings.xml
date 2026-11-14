@@ -143,4 +143,8 @@
     <string name="ob_next">Next</string>
     <string name="ob_done">Done</string>
     <string name="ob_step">%1$d of %2$d</string>
+    <string name="set_character">Character (try it with Test character below)</string>
+    <string name="char_blobby">Blobby</string>
+    <string name="char_cat">Kitty</string>
+    <string name="char_bunny">Bunny</string>
 </resources>
