@@ -29,6 +29,12 @@ class CharacterView(context: Context) : View(context) {
         set(value) { field = value; invalidate() }
     var line: String = ""
         set(value) { field = value; invalidate() }
+    /** Tanpa balon ucapan (untuk thumbnail di galeri karakter). */
+    var compact: Boolean = false
+        set(value) { field = value; invalidate() }
+    /** False = diam (tanpa animasi napas/getar), hemat tenaga untuk thumbnail. */
+    var animated: Boolean = true
+
     /** 0 = Blobby (polos), 1 = Kucing (telinga segitiga), 2 = Kelinci (telinga panjang). */
     var style: Int = 0
         set(value) { field = value; invalidate() }
@@ -62,7 +68,7 @@ class CharacterView(context: Context) : View(context) {
 
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()
-        loop.start()
+        if (animated) loop.start()
     }
 
     override fun onDetachedFromWindow() {
@@ -83,8 +89,8 @@ class CharacterView(context: Context) : View(context) {
         super.onDraw(canvas)
         val w = width.toFloat()
         val h = height.toFloat()
-        val bubbleH = dp(BUBBLE_DP)
-        drawBubble(canvas, w, bubbleH)
+        val bubbleH = if (compact) 0f else dp(BUBBLE_DP)
+        if (!compact) drawBubble(canvas, w, bubbleH)
 
         val t = phase * 2f * PI.toFloat()
         val shaky = !celebrate && (level == NagLevel.PANIC || level == NagLevel.CRITICAL)

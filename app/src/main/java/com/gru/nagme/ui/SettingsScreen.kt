@@ -52,7 +52,7 @@ import android.provider.Settings
  * Di Hari 4 baru bagian Izin & Diagnostik; pengaturan lain menyusul di Hari 6.
  */
 @Composable
-fun SettingsScreen(modifier: Modifier = Modifier) {
+fun SettingsScreen(onOpenCharacter: () -> Unit, modifier: Modifier = Modifier) {
     val context = LocalContext.current
     val app = context.applicationContext as NagMeApp
     val status = rememberPermissionStatus()
@@ -85,6 +85,7 @@ fun SettingsScreen(modifier: Modifier = Modifier) {
             style = MaterialTheme.typography.headlineSmall,
             color = MaterialTheme.colorScheme.onBackground
         )
+        CharacterEntryCard(onClick = onOpenCharacter)
         Text(
             text = stringResource(R.string.perm_section_title),
             style = MaterialTheme.typography.titleMedium,

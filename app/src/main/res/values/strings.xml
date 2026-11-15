@@ -152,4 +152,12 @@
     <string name="tasks_tab_active">Active (%1$d)</string>
     <string name="tasks_tab_history">History (%1$d)</string>
     <string name="empty_history">No history yet. Finished or past tasks will show up here.</string>
+    <string name="char_entry_title">Character</string>
+    <string name="char_entry_desc">Pick your character, preview its size on screen, and tune the voice.</string>
+    <string name="char_screen_title">Character</string>
+    <string name="char_preview">Live preview (real size)</string>
+    <string name="char_pick">Choose character</string>
+    <string name="char_voice">Voice</string>
+    <string name="char_celebrate">Done!</string>
+    <string name="btn_test_on_screen">Show it on screen (3 s)</string>
 </resources>

@@ -49,7 +49,8 @@ private val tabs = listOf(
 @Composable
 fun MainTabs(
     onAddTask: () -> Unit,
-    onEditTask: (Long) -> Unit
+    onEditTask: (Long) -> Unit,
+    onOpenCharacter: () -> Unit
 ) {
     var selectedTab by rememberSaveable { mutableIntStateOf(0) }
 
@@ -97,7 +98,7 @@ fun MainTabs(
                 )
                 1 -> CalendarScreen(onEditTask = onEditTask, modifier = contentModifier)
                 2 -> TaskListScreen(onEditTask = onEditTask, modifier = contentModifier)
-                else -> SettingsScreen(modifier = contentModifier)
+                else -> SettingsScreen(onOpenCharacter = onOpenCharacter, modifier = contentModifier)
             }
         }
     }

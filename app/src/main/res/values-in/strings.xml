@@ -152,4 +152,12 @@
     <string name="tasks_tab_active">Aktif (%1$d)</string>
     <string name="tasks_tab_history">Riwayat (%1$d)</string>
     <string name="empty_history">Belum ada riwayat. Tugas yang selesai atau sudah lewat muncul di sini.</string>
+    <string name="char_entry_title">Karakter</string>
+    <string name="char_entry_desc">Pilih karakter, lihat pratinjau ukurannya di layar, dan atur suaranya.</string>
+    <string name="char_screen_title">Karakter</string>
+    <string name="char_preview">Pratinjau langsung (ukuran asli)</string>
+    <string name="char_pick">Pilih karakter</string>
+    <string name="char_voice">Suara</string>
+    <string name="char_celebrate">Selesai!</string>
+    <string name="btn_test_on_screen">Tampilkan di layar (3 dtk)</string>
 </resources>
