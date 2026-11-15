@@ -10,6 +10,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -28,9 +29,9 @@ fun TodayScreen(
 ) {
     val state by viewModel.uiState.collectAsStateWithLifecycle()
     val permissions = rememberPermissionStatus()
-    val now = viewModel.now()
-    val today = state.allTasks.filter {
-        it.status == TaskStatus.ACTIVE && isSameDay(it.deadlineEpoch, now)
+    val now = rememberNow(viewModel::now)
+    val today = remember(state.allTasks, now) {
+        state.allTasks.filter { it.status == TaskStatus.ACTIVE && isSameDay(it.deadlineEpoch, now) }
     }
 
     Column(modifier = modifier) {

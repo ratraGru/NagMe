@@ -149,4 +149,7 @@
     <string name="char_bunny">Kelinci</string>
     <string name="today_sub">%1$d tugas jatuh tempo hari ini. Semangat!</string>
     <string name="today_sub_empty">Tidak ada tugas hari ini. Nikmati harimu!</string>
+    <string name="tasks_tab_active">Aktif (%1$d)</string>
+    <string name="tasks_tab_history">Riwayat (%1$d)</string>
+    <string name="empty_history">Belum ada riwayat. Tugas yang selesai atau sudah lewat muncul di sini.</string>
 </resources>

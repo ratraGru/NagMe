@@ -13,13 +13,18 @@ android {
         applicationId = "com.gru.nagme"
         minSdk = 26
         targetSdk = 35
-        versionCode = 8
-        versionName = "0.5.0-demo"
+        versionCode = 9
+        versionName = "0.6.0-demo"
     }
 
     buildTypes {
         release {
-            isMinifyEnabled = false
+            // Build "cepat": R8 + shrink membuat Compose jauh lebih lancar di HP kentang.
+            // Ditandatangani dengan kunci debug (tanpa keystore), jadi tetap bisa langsung diinstal.
+            isMinifyEnabled = true
+            isShrinkResources = true
+            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            signingConfig = signingConfigs.getByName("debug")
         }
     }
 

@@ -50,3 +50,15 @@ jobs:
         with:
           name: nagme-debug-apk
           path: app/build/outputs/apk/debug/app-debug.apk
+
+      # APK "cepat" (release + R8, kunci debug). Dipisah supaya kalau gagal, APK debug tetap jadi.
+      - name: Build fast (release) APK
+        id: release
+        continue-on-error: true
+        run: gradle --no-daemon assembleRelease
+
+      - uses: actions/upload-artifact@v4
+        if: steps.release.outcome == 'success'
+        with:
+          name: nagme-fast-apk
+          path: app/build/outputs/apk/release/app-release.apk

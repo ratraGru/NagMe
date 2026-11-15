@@ -149,4 +149,7 @@
     <string name="char_bunny">Bunny</string>
     <string name="today_sub">%1$d tasks due today. You got this!</string>
     <string name="today_sub_empty">Nothing due today. Enjoy it!</string>
+    <string name="tasks_tab_active">Active (%1$d)</string>
+    <string name="tasks_tab_history">History (%1$d)</string>
+    <string name="empty_history">No history yet. Finished or past tasks will show up here.</string>
 </resources>

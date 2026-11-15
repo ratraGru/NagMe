@@ -59,7 +59,7 @@ fun CalendarScreen(
 ) {
     val state by viewModel.uiState.collectAsStateWithLifecycle()
     val today = viewModel.today()
-    val now = viewModel.now()
+    val now = rememberNow(viewModel::now)
     val locale = Locale.getDefault()
     val firstDayOfWeek = WeekFields.of(locale).firstDayOfWeek
     val month = state.month
