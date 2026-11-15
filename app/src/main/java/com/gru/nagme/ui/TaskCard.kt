@@ -1,5 +1,13 @@
 package com.gru.nagme.ui
 
+import androidx.compose.animation.core.Spring
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.spring
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.interaction.collectIsPressedAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -31,6 +39,8 @@ import com.gru.nagme.data.NO_CATEGORY
 import com.gru.nagme.data.TaskEntity
 import com.gru.nagme.data.TaskStatus
 
+private const val URGENT_MS = 12 * 3_600_000L
+
 @Composable
 fun TaskCard(
     task: TaskEntity,
@@ -40,9 +50,24 @@ fun TaskCard(
     modifier: Modifier = Modifier
 ) {
     val done = task.status == TaskStatus.DONE
+    val interaction = remember { MutableInteractionSource() }
+    val pressed by interaction.collectIsPressedAsState()
+    val scale by animateFloatAsState(
+        targetValue = if (pressed) 0.97f else 1f,
+        animationSpec = spring(dampingRatio = Spring.DampingRatioMediumBouncy, stiffness = Spring.StiffnessMedium),
+        label = "press"
+    )
+    val contentAlpha by animateFloatAsState(if (done) 0.6f else 1f, label = "doneAlpha")
+    val urgent = !done && task.deadlineEpoch - now <= URGENT_MS
     Card(
         onClick = onClick,
-        modifier = modifier.fillMaxWidth(),
+        interactionSource = interaction,
+        modifier = modifier
+            .fillMaxWidth()
+            .graphicsLayer {
+                scaleX = scale
+                scaleY = scale
+            },
         shape = RoundedCornerShape(16.dp),
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.surfaceContainerLowest
@@ -65,7 +90,7 @@ fun TaskCard(
             Column(
                 modifier = Modifier
                     .weight(1f)
-                    .alpha(if (done) 0.6f else 1f),
+                    .alpha(contentAlpha),
                 verticalArrangement = Arrangement.spacedBy(2.dp)
             ) {
                 Text(
@@ -83,8 +108,17 @@ fun TaskCard(
                 )
                 Text(
                     text = if (done) stringResource(R.string.task_done) else remainingText(task.deadlineEpoch, now),
-                    style = MaterialTheme.typography.bodySmall,
-                    color = MaterialTheme.colorScheme.primary
+                    style = MaterialTheme.typography.labelMedium,
+                    color = if (urgent) MaterialTheme.colorScheme.onSecondaryContainer
+                    else MaterialTheme.colorScheme.onPrimaryContainer,
+                    modifier = Modifier
+                        .padding(top = 4.dp)
+                        .background(
+                            if (urgent) MaterialTheme.colorScheme.secondaryContainer
+                            else MaterialTheme.colorScheme.primaryContainer,
+                            RoundedCornerShape(50)
+                        )
+                        .padding(horizontal = 10.dp, vertical = 3.dp)
                 )
             }
             Checkbox(checked = done, onCheckedChange = { onToggleDone() })

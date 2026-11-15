@@ -1,5 +1,10 @@
 package com.gru.nagme.ui
 
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.slideInHorizontally
+import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 import com.gru.nagme.NagMeApp
@@ -38,6 +43,10 @@ fun NagMeRoot() {
         }
         composable(
             route = Routes.EDIT,
+            enterTransition = { slideInHorizontally(tween(260)) { it / 4 } + fadeIn(tween(260)) },
+            exitTransition = { fadeOut(tween(160)) },
+            popEnterTransition = { fadeIn(tween(200)) },
+            popExitTransition = { slideOutHorizontally(tween(220)) { it / 4 } + fadeOut(tween(200)) },
             arguments = listOf(
                 navArgument(TaskEditViewModel.ARG_TASK_ID) {
                     type = NavType.LongType

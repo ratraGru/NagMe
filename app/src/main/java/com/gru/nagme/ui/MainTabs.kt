@@ -1,5 +1,17 @@
 package com.gru.nagme.ui
 
+import androidx.compose.animation.AnimatedContent
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.Spring
+import androidx.compose.animation.core.spring
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.scaleIn
+import androidx.compose.animation.scaleOut
+import androidx.compose.animation.slideInHorizontally
+import androidx.compose.animation.slideOutHorizontally
+import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.List
@@ -56,7 +68,11 @@ fun MainTabs(
             }
         },
         floatingActionButton = {
-            if (selectedTab == 0 || selectedTab == 2) {
+            AnimatedVisibility(
+                visible = selectedTab == 0 || selectedTab == 2,
+                enter = scaleIn(spring(dampingRatio = Spring.DampingRatioMediumBouncy)) + fadeIn(),
+                exit = scaleOut(tween(120)) + fadeOut(tween(120))
+            ) {
                 FloatingActionButton(onClick = onAddTask) {
                     Icon(Icons.Default.Add, contentDescription = stringResource(R.string.cd_add))
                 }
@@ -64,15 +80,25 @@ fun MainTabs(
         }
     ) { innerPadding ->
         val contentModifier = Modifier.padding(innerPadding)
-        when (selectedTab) {
-            0 -> TodayScreen(
-                onEditTask = onEditTask,
-                onOpenPermissions = { selectedTab = 3 },
-                modifier = contentModifier
-            )
-            1 -> CalendarScreen(onEditTask = onEditTask, modifier = contentModifier)
-            2 -> TaskListScreen(onEditTask = onEditTask, modifier = contentModifier)
-            else -> SettingsScreen(modifier = contentModifier)
+        AnimatedContent(
+            targetState = selectedTab,
+            transitionSpec = {
+                val dir = if (targetState > initialState) 1 else -1
+                (slideInHorizontally(tween(180)) { it / 10 * dir } + fadeIn(tween(180))) togetherWith
+                    (slideOutHorizontally(tween(120)) { -it / 10 * dir } + fadeOut(tween(100)))
+            },
+            label = "tabs"
+        ) { tab ->
+            when (tab) {
+                0 -> TodayScreen(
+                    onEditTask = onEditTask,
+                    onOpenPermissions = { selectedTab = 3 },
+                    modifier = contentModifier
+                )
+                1 -> CalendarScreen(onEditTask = onEditTask, modifier = contentModifier)
+                2 -> TaskListScreen(onEditTask = onEditTask, modifier = contentModifier)
+                else -> SettingsScreen(modifier = contentModifier)
+            }
         }
     }
 }

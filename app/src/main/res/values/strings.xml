@@ -147,4 +147,6 @@
     <string name="char_blobby">Blobby</string>
     <string name="char_cat">Kitty</string>
     <string name="char_bunny">Bunny</string>
+    <string name="today_sub">%1$d tasks due today. You got this!</string>
+    <string name="today_sub_empty">Nothing due today. Enjoy it!</string>
 </resources>

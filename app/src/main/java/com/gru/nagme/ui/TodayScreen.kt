@@ -38,7 +38,14 @@ fun TodayScreen(
             text = stringResource(R.string.today_title),
             style = MaterialTheme.typography.headlineSmall,
             color = MaterialTheme.colorScheme.onBackground,
-            modifier = Modifier.padding(start = 16.dp, top = 16.dp, end = 16.dp, bottom = 8.dp)
+            modifier = Modifier.padding(start = 16.dp, top = 16.dp, end = 16.dp)
+        )
+        Text(
+            text = if (today.isEmpty()) stringResource(R.string.today_sub_empty)
+            else stringResource(R.string.today_sub, today.size),
+            style = MaterialTheme.typography.bodyMedium,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
+            modifier = Modifier.padding(start = 16.dp, end = 16.dp, bottom = 8.dp)
         )
         if (permissions.criticalMissing) {
             PermissionBanner(
@@ -55,6 +62,7 @@ fun TodayScreen(
             ) {
                 items(today, key = { it.id }) { task ->
                     TaskCard(
+                        modifier = Modifier.animateItem(),
                         task = task,
                         now = now,
                         onClick = { onEditTask(task.id) },

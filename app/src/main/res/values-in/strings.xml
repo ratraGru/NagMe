@@ -147,4 +147,6 @@
     <string name="char_blobby">Blobby</string>
     <string name="char_cat">Kucing</string>
     <string name="char_bunny">Kelinci</string>
+    <string name="today_sub">%1$d tugas jatuh tempo hari ini. Semangat!</string>
+    <string name="today_sub_empty">Tidak ada tugas hari ini. Nikmati harimu!</string>
 </resources>

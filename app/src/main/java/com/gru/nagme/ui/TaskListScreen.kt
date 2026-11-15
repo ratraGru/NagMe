@@ -64,6 +64,7 @@ fun TaskListScreen(
             ) {
                 items(state.tasks, key = { it.id }) { task ->
                     TaskCard(
+                        modifier = Modifier.animateItem(),
                         task = task,
                         now = now,
                         onClick = { onEditTask(task.id) },

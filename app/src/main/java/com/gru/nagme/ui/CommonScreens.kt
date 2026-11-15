@@ -1,5 +1,14 @@
 package com.gru.nagme.ui
 
+import androidx.compose.animation.core.FastOutSlowInEasing
+import androidx.compose.animation.core.RepeatMode
+import androidx.compose.animation.core.animateFloat
+import androidx.compose.animation.core.infiniteRepeatable
+import androidx.compose.animation.core.rememberInfiniteTransition
+import androidx.compose.animation.core.tween
+import androidx.compose.runtime.getValue
+import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -24,11 +33,7 @@ fun EmptyState(messageRes: Int, modifier: Modifier = Modifier) {
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text(
-            text = "(•‿•)",
-            style = MaterialTheme.typography.displaySmall,
-            color = MaterialTheme.colorScheme.primary
-        )
+        BobbingFace(MaterialTheme.typography.displaySmall)
         Text(
             text = stringResource(messageRes),
             style = MaterialTheme.typography.bodyLarge,
@@ -37,6 +42,24 @@ fun EmptyState(messageRes: Int, modifier: Modifier = Modifier) {
             modifier = Modifier.padding(top = 16.dp)
         )
     }
+}
+
+/** Wajah kecil yang naik-turun pelan. Hanya satu elemen yang beranimasi, jadi ringan. */
+@Composable
+fun BobbingFace(style: TextStyle, modifier: Modifier = Modifier) {
+    val transition = rememberInfiniteTransition(label = "bob")
+    val dy by transition.animateFloat(
+        initialValue = -14f,
+        targetValue = 14f,
+        animationSpec = infiniteRepeatable(tween(1200, easing = FastOutSlowInEasing), RepeatMode.Reverse),
+        label = "bobY"
+    )
+    Text(
+        text = "(•‿•)",
+        style = style,
+        color = MaterialTheme.colorScheme.primary,
+        modifier = modifier.graphicsLayer { translationY = dy }
+    )
 }
 
 @Composable

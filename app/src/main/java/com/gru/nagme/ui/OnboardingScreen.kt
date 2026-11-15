@@ -90,7 +90,7 @@ fun OnboardingScreen(onFinish: () -> Unit) {
             TextButton(onClick = onFinish) { Text(stringResource(com.gru.nagme.R.string.ob_skip)) }
         }
         Spacer(Modifier.weight(1f))
-        Text("(•‿•)", style = MaterialTheme.typography.displayMedium, color = MaterialTheme.colorScheme.primary)
+        BobbingFace(MaterialTheme.typography.displayMedium)
         Spacer(Modifier.height(24.dp))
         Text(
             title,
