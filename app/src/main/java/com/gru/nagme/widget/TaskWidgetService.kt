@@ -2,6 +2,7 @@ package com.gru.nagme.widget
 
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import android.view.View
 import android.widget.RemoteViews
 import android.widget.RemoteViewsService
@@ -44,6 +45,21 @@ class TaskWidgetService : RemoteViewsService() {
             val task = items.getOrNull(position)
                 ?: return RemoteViews(context.packageName, R.layout.widget_task_item)
             val views = RemoteViews(context.packageName, R.layout.widget_task_item)
+            // Kalau ada yang gagal, tetap tampilkan judulnya (jangan mentok di "Memuat...").
+            return try {
+                bind(views, task)
+            } catch (e: Exception) {
+                Log.e("NagMeWidget", "gagal membuat baris", e)
+                views.setTextViewText(R.id.item_title, task.title)
+                views.setOnClickFillInIntent(
+                    R.id.item_root,
+                    Intent().putExtra(TaskWidgetProvider.EXTRA_TASK_ID, task.id)
+                )
+                views
+            }
+        }
+
+        private fun bind(views: RemoteViews, task: TaskEntity): RemoteViews {
 
             val remaining = task.deadlineEpoch - now
             val remainingText = if (remaining <= 0L) {
