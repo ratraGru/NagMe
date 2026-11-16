@@ -163,4 +163,5 @@
     <string name="widget_title">NagMe tasks</string>
     <string name="widget_desc">Your active tasks at a glance on the home screen.</string>
     <string name="widget_empty">No active tasks. Tap + to add one!</string>
+    <string name="widget_more">+%1$d more tasks</string>
 </resources>

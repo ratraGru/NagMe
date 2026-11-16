@@ -50,11 +50,6 @@
                 android:name="android.appwidget.provider"
                 android:resource="@xml/nagme_widget_info" />
         </receiver>
-        <service
-            android:name=".widget.TaskWidgetService"
-            android:exported="false"
-            android:permission="android.permission.BIND_REMOTEVIEWS" />
-
         <!-- Alarm tunggal dari AlarmManager (hanya dari app ini sendiri) -->
         <receiver
             android:name=".service.AlarmReceiver"
