@@ -6,6 +6,7 @@ import androidx.compose.animation.core.tween
 import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.platform.LocalContext
 import com.gru.nagme.NagMeApp
 import androidx.navigation.NavType
@@ -23,9 +24,16 @@ private object Routes {
 }
 
 @Composable
-fun NagMeRoot() {
+fun NagMeRoot(pendingOpen: Long? = null, onConsumed: () -> Unit = {}) {
     val navController = rememberNavController()
     val settings = (LocalContext.current.applicationContext as NagMeApp).container.settings
+    // Permintaan dari widget homescreen: buka layar tambah/edit tugas.
+    LaunchedEffect(pendingOpen) {
+        if (pendingOpen != null) {
+            if (settings.onboardingDone) navController.navigate(Routes.edit(pendingOpen))
+            onConsumed()
+        }
+    }
     val start = if (settings.onboardingDone) Routes.MAIN else Routes.ONBOARDING
     NavHost(navController = navController, startDestination = start) {
         composable(Routes.ONBOARDING) {

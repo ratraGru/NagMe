@@ -10,6 +10,7 @@ import com.gru.nagme.data.SettingsPrefs
 import com.gru.nagme.service.SchedulerManager
 import com.gru.nagme.service.SchedulerPrefs
 import com.gru.nagme.service.TriggerProcessor
+import com.gru.nagme.widget.TaskWidgetProvider
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
@@ -31,7 +32,10 @@ class AppContainer(context: Context) {
 
     // taskRepository & scheduler saling butuh; lazy + lambda memutus lingkarannya.
     val taskRepository: TaskRepository by lazy {
-        TaskRepository(database.taskDao(), clock) { scheduler.scheduleNext() }
+        TaskRepository(database.taskDao(), clock) {
+            scheduler.scheduleNext()
+            TaskWidgetProvider.refresh(appContext)
+        }
     }
 
     val scheduler: SchedulerManager by lazy {

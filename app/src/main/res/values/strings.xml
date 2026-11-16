@@ -160,4 +160,7 @@
     <string name="char_voice">Voice</string>
     <string name="char_celebrate">Done!</string>
     <string name="btn_test_on_screen">Show it on screen (3 s)</string>
+    <string name="widget_title">NagMe tasks</string>
+    <string name="widget_desc">Your active tasks at a glance on the home screen.</string>
+    <string name="widget_empty">No active tasks. Tap + to add one!</string>
 </resources>

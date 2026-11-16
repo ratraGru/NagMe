@@ -22,6 +22,10 @@ interface TaskDao {
     @Query("SELECT * FROM tasks WHERE status = 0 AND nag_enabled = 1")
     suspend fun getActiveNagTasks(): List<TaskEntity>
 
+    // Untuk widget homescreen: semua tugas aktif, terdekat dulu.
+    @Query("SELECT * FROM tasks WHERE status = 0 ORDER BY deadline_epoch ASC LIMIT 30")
+    suspend fun getActiveForWidget(): List<TaskEntity>
+
     @Insert
     suspend fun insert(task: TaskEntity): Long
 

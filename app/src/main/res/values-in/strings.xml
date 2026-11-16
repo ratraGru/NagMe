@@ -160,4 +160,7 @@
     <string name="char_voice">Suara</string>
     <string name="char_celebrate">Selesai!</string>
     <string name="btn_test_on_screen">Tampilkan di layar (3 dtk)</string>
+    <string name="widget_title">Tugas NagMe</string>
+    <string name="widget_desc">Daftar tugas aktif langsung di layar utama.</string>
+    <string name="widget_empty">Belum ada tugas aktif. Ketuk + untuk menambah!</string>
 </resources>

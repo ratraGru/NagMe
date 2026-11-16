@@ -18,6 +18,8 @@ class TaskRepository(
     private val clock: Clock,
     private val onChanged: suspend () -> Unit = {}
 ) {
+    suspend fun activeForWidget(): List<TaskEntity> = dao.getActiveForWidget()
+
     fun observeAll(): Flow<List<TaskEntity>> = dao.observeAll()
 
     fun observeBetween(startEpoch: Long, endEpoch: Long): Flow<List<TaskEntity>> =
