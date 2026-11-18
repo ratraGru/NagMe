@@ -6,6 +6,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.SystemBarStyle
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import com.gru.nagme.service.KeepAliveService
 import com.gru.nagme.ui.NagMeRoot
 import com.gru.nagme.ui.NagMeTheme
 
@@ -17,6 +18,7 @@ class MainActivity : ComponentActivity() {
             navigationBarStyle = SystemBarStyle.light(Color.TRANSPARENT, Color.TRANSPARENT)
         )
         super.onCreate(savedInstanceState)
+        KeepAliveService.sync(this)
         setContent {
             NagMeTheme {
                 NagMeRoot()

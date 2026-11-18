@@ -85,7 +85,7 @@
     <string name="notif_test_title">NagMe test</string>
     <string name="notif_test_body">If you can see this, notifications work.</string>
     <string name="tips_oem_title">Tip for Nubia and some other brands</string>
-    <string name="tips_oem_body">Open the phone\'s Settings &gt; Apps &gt; NagMe, allow Autostart, and set battery usage to Unrestricted. Otherwise the system may stop reminders in the background.</string>
+    <string name="tips_oem_body">Open the phone\'s Settings &gt; Apps &gt; NagMe, allow Autostart, and set battery usage to Unrestricted. Also lock NagMe in the recent apps screen (long-press or pull down the app card and tap the lock). Otherwise the system may stop reminders in the background.</string>
 
     <string name="channel_name">Deadline reminders</string>
     <string name="channel_desc">Reminders when a task deadline gets close</string>
@@ -160,4 +160,9 @@
     <string name="char_voice">Voice</string>
     <string name="char_celebrate">Done!</string>
     <string name="btn_test_on_screen">Show it on screen (3 s)</string>
+    <string name="keepalive_channel">Background guard</string>
+    <string name="keepalive_title">NagMe is keeping watch</string>
+    <string name="keepalive_text">Reminders keep working after you close the app.</string>
+    <string name="set_keepalive">Keep reminders alive in the background</string>
+    <string name="set_keepalive_desc">Shows a quiet notification so the phone is less likely to stop NagMe after you swipe it from recents. Turn off if you do not need it.</string>
 </resources>

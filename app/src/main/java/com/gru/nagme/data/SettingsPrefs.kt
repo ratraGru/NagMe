@@ -48,12 +48,18 @@ class SettingsPrefs(context: Context) {
         get() = prefs.getInt(KEY_CHARACTER, 0).coerceIn(0, 2)
         set(v) { prefs.edit().putInt(KEY_CHARACTER, v.coerceIn(0, 2)).apply() }
 
+    /** Penjaga latar (foreground service ringan) supaya pengingat tetap hidup setelah app ditutup. */
+    var keepAliveEnabled: Boolean
+        get() = prefs.getBoolean(KEY_KEEP_ALIVE, true)
+        set(v) { prefs.edit().putBoolean(KEY_KEEP_ALIVE, v).apply() }
+
     /** True setelah onboarding selesai atau dilewati. */
     var onboardingDone: Boolean
         get() = prefs.getBoolean(KEY_ONBOARDING, false)
         set(v) { prefs.edit().putBoolean(KEY_ONBOARDING, v).apply() }
 
     companion object {
+        private const val KEY_KEEP_ALIVE = "keep_alive"
         private const val KEY_CHARACTER = "character_style"
         private const val KEY_ONBOARDING = "onboarding_done"
 

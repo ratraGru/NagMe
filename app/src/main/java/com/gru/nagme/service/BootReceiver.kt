@@ -24,6 +24,7 @@ class BootReceiver : BroadcastReceiver() {
             try {
                 Log.d(TAG, "Menjadwalkan ulang karena ${intent.action}")
                 app.container.scheduler.onBootCompleted()
+                if (app.container.settings.keepAliveEnabled) KeepAliveService.start(context)
             } catch (t: Throwable) {
                 Log.e(TAG, "Gagal menjadwalkan ulang", t)
             } finally {

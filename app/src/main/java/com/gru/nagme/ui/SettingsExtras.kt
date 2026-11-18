@@ -35,6 +35,7 @@ import com.gru.nagme.data.SettingsPrefs
 import com.gru.nagme.domain.NagLevel
 import com.gru.nagme.domain.formatPrecise
 import com.gru.nagme.service.AlarmProcessor
+import com.gru.nagme.service.KeepAliveService
 import kotlinx.coroutines.launch
 
 private const val HOUR = 3_600_000L
@@ -68,6 +69,8 @@ fun UserSettingsCard() {
     val s: SettingsPrefs = app.container.settings
 
     var master by remember { mutableStateOf(s.masterEnabled) }
+    var keepAlive by remember { mutableStateOf(s.keepAliveEnabled) }
+    val appContext = LocalContext.current.applicationContext
     val levels = listOf(
         NagLevel.CALM to R.string.char_test_l1,
         NagLevel.WORRIED to R.string.char_test_l2,
@@ -80,6 +83,16 @@ fun UserSettingsCard() {
 
     SectionCard(stringResource(R.string.set_title)) {
         SwitchRow(stringResource(R.string.set_master), master) { master = it; s.masterEnabled = it }
+        SwitchRow(stringResource(R.string.set_keepalive), keepAlive) {
+            keepAlive = it
+            s.keepAliveEnabled = it
+            KeepAliveService.sync(appContext)
+        }
+        Text(
+            stringResource(R.string.set_keepalive_desc),
+            style = MaterialTheme.typography.bodySmall,
+            color = MaterialTheme.colorScheme.onSurfaceVariant
+        )
         levels.forEachIndexed { i, (level, label) ->
             SwitchRow(stringResource(label), levelState[i].value) {
                 levelState[i].value = it

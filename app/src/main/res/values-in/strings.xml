@@ -85,7 +85,7 @@
     <string name="notif_test_title">Tes NagMe</string>
     <string name="notif_test_body">Kalau ini terlihat, notifikasi berfungsi.</string>
     <string name="tips_oem_title">Tips untuk Nubia dan merek tertentu</string>
-    <string name="tips_oem_body">Buka Pengaturan HP &gt; Aplikasi &gt; NagMe, aktifkan Autostart, dan atur pemakaian baterai ke Tanpa batasan. Kalau tidak, sistem bisa mematikan pengingat di latar belakang.</string>
+    <string name="tips_oem_body">Buka Pengaturan HP &gt; Aplikasi &gt; NagMe, aktifkan Autostart, dan atur pemakaian baterai ke Tanpa batasan. Kalau tidak, sistem bisa mematikan pengingat di latar belakang. Kunci juga NagMe di layar recent (tekan lama atau tarik kartu app ke bawah, lalu ketuk gembok).</string>
 
     <string name="channel_name">Pengingat deadline</string>
     <string name="channel_desc">Pengingat saat deadline tugas mendekat</string>
@@ -160,4 +160,9 @@
     <string name="char_voice">Suara</string>
     <string name="char_celebrate">Selesai!</string>
     <string name="btn_test_on_screen">Tampilkan di layar (3 dtk)</string>
+    <string name="keepalive_channel">Penjaga latar</string>
+    <string name="keepalive_title">NagMe lagi berjaga</string>
+    <string name="keepalive_text">Pengingat tetap jalan walau app ditutup.</string>
+    <string name="set_keepalive">Jaga pengingat tetap hidup di latar</string>
+    <string name="set_keepalive_desc">Menampilkan notifikasi senyap supaya HP lebih jarang mematikan NagMe setelah digeser dari recent. Matikan kalau tidak perlu.</string>
 </resources>

@@ -55,6 +55,16 @@
             </intent-filter>
         </receiver>
 
+        <!-- Penjaga latar: foreground service ringan (notifikasi senyap) agar proses tidak mudah dimatikan -->
+        <service
+            android:name=".service.KeepAliveService"
+            android:exported="false"
+            android:foregroundServiceType="specialUse">
+            <property
+                android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE"
+                android:value="Keeps deadline reminders alive after the app is closed from recents" />
+        </service>
+
         <!-- Foreground service singkat: hanya hidup selama karakter overlay tampil -->
         <service
             android:name=".service.OverlayService"
