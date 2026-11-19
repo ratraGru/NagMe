@@ -10,11 +10,11 @@
 
     <string name="today_title">Deadline hari ini</string>
     <string name="tasks_title">Semua tugas</string>
-    <string name="empty_tasks">Belum ada tugas. Yuk catat yang pertama!</string>
-    <string name="empty_today">Tidak ada deadline hari ini. Santai dulu.</string>
+    <string name="empty_tasks">Belum ada tugas. Catat yang pertama dulu.</string>
+    <string name="empty_today">Nggak ada deadline hari ini. Santai dulu.</string>
 
     <string name="cal_today">Hari ini</string>
-    <string name="cal_empty_day">Tidak ada deadline di tanggal ini.</string>
+    <string name="cal_empty_day">Nggak ada deadline di tanggal ini.</string>
 
     <string name="title_add_task">Tambah tugas</string>
     <string name="title_edit_task">Ubah tugas</string>
@@ -22,7 +22,7 @@
     <string name="field_description">Deskripsi (opsional)</string>
     <string name="field_deadline">Deadline</string>
     <string name="field_category">Kategori</string>
-    <string name="field_nag">Ingatkan aku soal tugas ini</string>
+    <string name="field_nag">Ingetin aku soal tugas ini</string>
 
     <string name="filter_all">Semua</string>
     <string name="cat_none">Tanpa kategori</string>
@@ -47,9 +47,9 @@
     <string name="btn_ok">OK</string>
 
     <string name="dialog_delete_title">Hapus tugas ini?</string>
-    <string name="dialog_delete_body">Tugas yang dihapus tidak bisa dikembalikan.</string>
+    <string name="dialog_delete_body">Kalau dihapus, tugasnya nggak bisa balik lagi.</string>
     <string name="dialog_past_title">Deadline sudah lewat</string>
-    <string name="dialog_past_body">Deadline ini sudah lewat, jadi karakter tidak akan mengingatkan. Tetap simpan?</string>
+    <string name="dialog_past_body">Deadline-nya udah lewat, jadi karakter nggak bakal ngingetin. Tetap simpan?</string>
 
     <string name="cd_back">Kembali</string>
     <string name="cd_add">Tambah tugas</string>
@@ -57,15 +57,15 @@
 
     <string name="settings_title">Pengaturan</string>
     <string name="perm_section_title">Izin &amp; diagnostik</string>
-    <string name="perm_intro">Karakter butuh izin ini supaya bisa mengingatkanmu tepat waktu. Tiap tombol membuka pengaturan sistem.</string>
+    <string name="perm_intro">Karakter butuh izin ini biar bisa ngingetin tepat waktu. Tiap tombol bakal buka pengaturan HP.</string>
     <string name="perm_overlay_title">Tampil di atas aplikasi lain</string>
     <string name="perm_overlay_desc">Biar karakter bisa nongol di atas TikTok, WhatsApp, dan lainnya.</string>
     <string name="perm_alarm_title">Alarm tepat waktu</string>
-    <string name="perm_alarm_desc">Membangunkan app tepat di waktu pengingat, bahkan saat HP sedang diam.</string>
+    <string name="perm_alarm_desc">Biar pengingat bunyi pas waktunya, walau HP lagi diem.</string>
     <string name="perm_notif_title">Notifikasi</string>
-    <string name="perm_notif_desc">Dipakai sebagai cadangan kalau karakter tidak bisa muncul (misalnya di layar terkunci).</string>
+    <string name="perm_notif_desc">Cadangan kalau karakter nggak bisa muncul, misalnya pas layar terkunci.</string>
     <string name="perm_battery_title">Baterai tanpa batasan (disarankan)</string>
-    <string name="perm_battery_desc">Supaya HP tidak mematikan NagMe di latar belakang.</string>
+    <string name="perm_battery_desc">Biar HP nggak ngematiin NagMe di belakang.</string>
     <string name="perm_granted">Sudah diberikan</string>
     <string name="perm_missing">Belum diberikan</string>
     <string name="btn_enable">Aktifkan</string>
@@ -81,20 +81,20 @@
     <string name="diag_channel_ok">Saluran notifikasi: aktif</string>
     <string name="diag_channel_off">Saluran notifikasi: DIBLOKIR (aktifkan di pengaturan notifikasi HP)</string>
     <string name="btn_test_notif">Kirim notifikasi tes sekarang</string>
-    <string name="toast_notif_off">Notifikasi NagMe dimatikan.</string>
+    <string name="toast_notif_off">Notifikasi NagMe lagi dimatiin di pengaturan HP.</string>
     <string name="notif_test_title">Tes NagMe</string>
-    <string name="notif_test_body">Kalau ini terlihat, notifikasi berfungsi.</string>
-    <string name="tips_oem_title">Tips untuk Nubia dan merek tertentu</string>
-    <string name="tips_oem_body">Buka Pengaturan HP &gt; Aplikasi &gt; NagMe, aktifkan Autostart, dan atur pemakaian baterai ke Tanpa batasan. Kalau tidak, sistem bisa mematikan pengingat di latar belakang. Kunci juga NagMe di layar recent (tekan lama atau tarik kartu app ke bawah, lalu ketuk gembok).</string>
+    <string name="notif_test_body">Kalau ini kelihatan, notifikasinya jalan.</string>
+    <string name="tips_oem_title">Tips buat Nubia dan HP sejenis</string>
+    <string name="tips_oem_body">Buka Pengaturan HP &gt; Aplikasi &gt; NagMe, nyalain Autostart, terus set baterai ke Tanpa batasan. Kunci juga NagMe di layar recent (tekan lama kartunya atau tarik ke bawah, ketuk gembok). Kalau nggak, sistem bisa ngematiin pengingat di belakang.</string>
 
     <string name="channel_name">Pengingat deadline</string>
     <string name="channel_desc">Pengingat saat deadline tugas mendekat</string>
-    <string name="notif_l1">Santai, masih ada %1$s. Tapi jangan lupa ya.</string>
-    <string name="notif_l2">Tinggal %1$s lagi lho. Udah mulai belum?</string>
-    <string name="notif_l3">Udah mepet, tinggal %1$s!</string>
-    <string name="notif_l4">Woi. Tinggal %1$s. Gerak.</string>
-    <string name="notif_l5">Tinggal %1$s! Gw panik. Lu harus panik juga!</string>
-    <string name="notif_l6">Ya udah, deadline-nya lewat. Terserah lu deh.</string>
+    <string name="notif_l1">Masih %1$s sih, jadi santai dulu aja</string>
+    <string name="notif_l2">Sisa %1$s lagi, mulai kerjain sekarang!</string>
+    <string name="notif_l3">Udah mepet banget, sisa %1$s!</string>
+    <string name="notif_l4">Woiii kerjain sekarang, sisa %1$s!!</string>
+    <string name="notif_l5">KERJAIN SEKARANG JUGA, sisa %1$s !!!!</string>
+    <string name="notif_l6">Telatt Kannn</string>
 
     <string name="fgs_channel_name">Karakter di layar</string>
     <string name="fgs_notif_body">Temanmu lagi mampir…</string>
@@ -106,22 +106,22 @@
     <string name="char_test_l4">Level 4</string>
     <string name="char_test_l5">Level 5</string>
     <string name="char_test_late">Terlambat</string>
-    <string name="toast_overlay_missing">Aktifkan dulu \"Tampil di atas aplikasi lain\".</string>
-    <string name="toast_char_coming">Pindah ke app mana saja. Karakter muncul dalam 3 detik.</string>
+    <string name="toast_overlay_missing">Aktifin dulu izin \"Tampil di atas aplikasi lain\".</string>
+    <string name="toast_char_coming">Pindah ke app mana aja. Karakter muncul dalam 3 detik.</string>
     <string name="char_test_task">Tugas contoh</string>
     <string name="overlay_menu_done">Selesai</string>
     <string name="overlay_menu_snooze">Tunda</string>
     <string name="overlay_menu_open">Buka app</string>
     <string name="set_title">Pengaturan</string>
-    <string name="set_master">Karakter &amp; pengingat (saklar utama)</string>
+    <string name="set_master">Nyalain karakter &amp; pengingat</string>
     <string name="set_volume">Volume: %1$d%%</string>
     <string name="set_size">Ukuran karakter: %1$d dp</string>
-    <string name="set_alarm_stream">Suara lewat jalur alarm (tetap bunyi saat mode senyap)</string>
+    <string name="set_alarm_stream">Suara lewat jalur alarm (tetap bunyi walau mode senyap)</string>
     <string name="set_pack">Paket suara</string>
     <string name="pack_calm">Santai</string>
     <string name="pack_dramatic">Dramatis</string>
     <string name="demo_title">Mode Demo</string>
-    <string name="demo_desc">Isi tugas dummy, lalu majukan waktu untuk melihat karakter makin panik tanpa menunggu.</string>
+    <string name="demo_desc">Isi tugas dummy, terus majuin waktu buat lihat karakternya makin panik tanpa nunggu.</string>
     <string name="demo_clock">Jam app: %1$s</string>
     <string name="demo_clock_real">waktu asli</string>
     <string name="demo_dummy">Isi data dummy (6 tugas)</string>
@@ -130,7 +130,7 @@
     <string name="demo_plus_6h">+6 jam</string>
     <string name="demo_plus_1d">+1 hari</string>
     <string name="demo_reset">Reset data demo</string>
-    <string name="demo_reset_done">Semua tugas dihapus, jam kembali normal</string>
+    <string name="demo_reset_done">Semua tugas dihapus, jam balik normal</string>
     <string name="dummy_1">Presentasi Bahasa Inggris</string>
     <string name="dummy_2">Tugas pemrograman</string>
     <string name="dummy_3">Laporan kelompok</string>
@@ -138,7 +138,7 @@
     <string name="dummy_5">Baca bab 5</string>
     <string name="dummy_6">Rapikan catatan</string>
     <string name="ob_welcome_title">Kenalan sama temen cerewetmu</string>
-    <string name="ob_welcome_body">NagMe muncul di layar saat deadline makin dekat, dan makin lama makin panik. Yuk atur 3 izin singkat supaya dia bisa menjangkau lu.</string>
+    <string name="ob_welcome_body">NagMe muncul di layar pas deadline makin dekat, dan makin lama makin panik. Atur 3 izin dulu biar dia bisa nyampe ke kamu.</string>
     <string name="ob_skip">Lewati</string>
     <string name="ob_next">Lanjut</string>
     <string name="ob_done">Selesai</string>
@@ -147,15 +147,15 @@
     <string name="char_blobby">Blobby</string>
     <string name="char_cat">Kucing</string>
     <string name="char_bunny">Kelinci</string>
-    <string name="today_sub">%1$d tugas jatuh tempo hari ini. Semangat!</string>
-    <string name="today_sub_empty">Tidak ada tugas hari ini. Nikmati harimu!</string>
+    <string name="today_sub">Ada %1$d tugas yang deadline-nya hari ini</string>
+    <string name="today_sub_empty">Hari ini nggak ada deadline, aman</string>
     <string name="tasks_tab_active">Aktif (%1$d)</string>
     <string name="tasks_tab_history">Riwayat (%1$d)</string>
-    <string name="empty_history">Belum ada riwayat. Tugas yang selesai atau sudah lewat muncul di sini.</string>
+    <string name="empty_history">Belum ada riwayat. Tugas yang udah selesai atau lewat bakal masuk sini.</string>
     <string name="char_entry_title">Karakter</string>
-    <string name="char_entry_desc">Pilih karakter, lihat pratinjau ukurannya di layar, dan atur suaranya.</string>
+    <string name="char_entry_desc">Pilih karakter, lihat ukurannya langsung, dan atur suaranya.</string>
     <string name="char_screen_title">Karakter</string>
-    <string name="char_preview">Pratinjau langsung (ukuran asli)</string>
+    <string name="char_preview">Pratinjau (ukuran asli)</string>
     <string name="char_pick">Pilih karakter</string>
     <string name="char_voice">Suara</string>
     <string name="char_celebrate">Selesai!</string>
@@ -164,5 +164,5 @@
     <string name="keepalive_title">NagMe lagi berjaga</string>
     <string name="keepalive_text">Pengingat tetap jalan walau app ditutup.</string>
     <string name="set_keepalive">Jaga pengingat tetap hidup di latar</string>
-    <string name="set_keepalive_desc">Menampilkan notifikasi senyap supaya HP lebih jarang mematikan NagMe setelah digeser dari recent. Matikan kalau tidak perlu.</string>
+    <string name="set_keepalive_desc">Munculin notifikasi senyap biar HP jarang ngematiin NagMe pas digeser dari recent. Matiin aja kalau nggak perlu.</string>
 </resources>

@@ -78,18 +78,14 @@ fun CharacterSettingsScreen(onBack: () -> Unit) {
         R.string.char_test_l4, R.string.char_test_l5, R.string.char_test_late,
         R.string.char_celebrate
     )
-    val celebrateLine = remember { LineBank.celebrate() }
-    val lines = listOf(
-        stringResource(R.string.notif_l1, "2h"),
-        stringResource(R.string.notif_l2, "20h"),
-        stringResource(R.string.notif_l3, "10h"),
-        stringResource(R.string.notif_l4, "5h"),
-        stringResource(R.string.notif_l5, "2h"),
-        stringResource(R.string.notif_l6),
-        celebrateLine
-    )
-    val styleNames = listOf(R.string.char_blobby, R.string.char_cat, R.string.char_bunny)
     val sample = stringResource(R.string.char_test_task)
+    // Teks yang sama dengan balon asli (LineBank), sampel sisa waktu per level.
+    val hour = 3_600_000L
+    val sampleRemaining = listOf(60 * hour, 20 * hour, 10 * hour, 5 * hour, 2 * hour, 0L)
+    val lines = remember(sample) {
+        levels.mapIndexed { i, level -> LineBank.pick(level, sampleRemaining[i], sample) } + LineBank.celebrate()
+    }
+    val styleNames = listOf(R.string.char_blobby, R.string.char_cat, R.string.char_bunny)
 
     Scaffold(containerColor = MaterialTheme.colorScheme.background) { inner ->
         Column(

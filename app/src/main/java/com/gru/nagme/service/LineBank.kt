@@ -6,32 +6,32 @@ import kotlin.random.Random
 /** Bank skrip suara — Master Context Bagian 21. {sisa} dan {judul} diisi otomatis. */
 object LineBank {
     private val l1 = listOf(
-        "Santai, masih ada {sisa}. Tapi jangan lupa {judul} ya.",
-        "Halo, cuma mampir ngingetin aja."
+        "Kamu ada tugas {judul} jangan lupa, tapi masih {sisa} sih jadi santai",
+        "Ada Tugas {judul} jangan lupa, skrg masih {sisa} santai dulu aja"
     )
     private val l2 = listOf(
-        "{judul} tinggal {sisa} lagi lho. Udah mulai belum?",
-        "Hmm, kayaknya lu harus mulai mikir nih."
+        "Tugas {judul} sisa {sisa} lagi, mulai kerjain sekarang!",
+        "Tugas {judul} belum selesai oyy, sisa {sisa}"
     )
     private val l3 = listOf(
-        "Ayo mulai dong, tinggal {sisa}!",
-        "Ini udah mepet lho, serius."
+        "Kamu ada tugas {judul} sisa {sisa} udah mepet banget!",
+        "Tugas {judul} udah mepet, selesain sekarang!"
     )
     private val l4 = listOf(
-        "Woi. Tinggal {sisa}. Gerak.",
-        "Buka laptop sekarang! Sekarang!"
+        "Woiii tugasmu yg {judul} kerjain sekarang!!",
+        "Tugas Kerjain itu WOII!!"
     )
     private val l5 = listOf(
-        "Tinggal {sisa}! Gw panik. Lu harus panik juga!",
-        "Cepet! Cepet!"
+        "KERJAIN SEKARANG JUGA !!!!",
+        "WOIIII KAMU ADA TUGASS LOHHH!!!"
     )
     private val l6 = listOf(
-        "Ya udah, telat. Terserah lu deh.",
-        "Gw udah bilang apa."
+        "Telatt Kannn",
+        "Cape udah lahh"
     )
     private val done = listOf(
-        "Yeay! Selesai! Gw bangga sama lu.",
-        "Nah gitu dong. Lanjut besok ya."
+        "Nahh gitu dongg",
+        "Nahhhh Mantap"
     )
 
     fun pick(level: NagLevel, remainingMs: Long, title: String): String {
@@ -50,10 +50,10 @@ object LineBank {
 
     /** Dialog snooze berubah sesuai hitungan — Bagian 6.4. */
     fun snoozeLine(count: Int): String = when {
-        count <= 1 -> "Ya udah, 10 menit lagi ya."
-        count == 2 -> "Sip, tapi ini beneran 10 menit ya."
-        count == 3 -> "Ya udah, terserah."
-        else -> "Udah capek ngingetin."
+        count <= 1 -> "Ya udah 10 menit deh."
+        count == 2 -> "Hmm, oke 10 menit lagi"
+        count == 3 -> "Ahh udah lahh"
+        else -> "Terserahh udah"
     }
 
     private fun fill(template: String, remainingMs: Long, title: String): String =
