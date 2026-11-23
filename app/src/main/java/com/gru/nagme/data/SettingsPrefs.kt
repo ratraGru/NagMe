@@ -53,12 +53,18 @@ class SettingsPrefs(context: Context) {
         get() = prefs.getBoolean(KEY_KEEP_ALIVE, true)
         set(v) { prefs.edit().putBoolean(KEY_KEEP_ALIVE, v).apply() }
 
+    /** Tema aplikasi: true = gelap (bawaan), false = terang. */
+    var darkTheme: Boolean
+        get() = prefs.getBoolean(KEY_DARK, true)
+        set(v) { prefs.edit().putBoolean(KEY_DARK, v).apply() }
+
     /** True setelah onboarding selesai atau dilewati. */
     var onboardingDone: Boolean
         get() = prefs.getBoolean(KEY_ONBOARDING, false)
         set(v) { prefs.edit().putBoolean(KEY_ONBOARDING, v).apply() }
 
     companion object {
+        private const val KEY_DARK = "theme_dark"
         private const val KEY_KEEP_ALIVE = "keep_alive"
         private const val KEY_CHARACTER = "character_style"
         private const val KEY_ONBOARDING = "onboarding_done"

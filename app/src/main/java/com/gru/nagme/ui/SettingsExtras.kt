@@ -44,7 +44,7 @@ private const val HOUR = 3_600_000L
 internal fun SectionCard(title: String, content: @Composable () -> Unit) {
     Card(
         modifier = Modifier.fillMaxWidth(),
-        shape = RoundedCornerShape(16.dp),
+        shape = RoundedCornerShape(22.dp),
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceContainer)
     ) {
         Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
@@ -59,6 +59,27 @@ internal fun SwitchRow(label: String, checked: Boolean, onChange: (Boolean) -> U
     Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
         Text(label, Modifier.weight(1f), style = MaterialTheme.typography.bodyMedium)
         Switch(checked = checked, onCheckedChange = onChange)
+    }
+}
+
+/** Pilihan tema: gelap atau terang, langsung berlaku. */
+@Composable
+fun AppearanceCard() {
+    val app = LocalContext.current.applicationContext as NagMeApp
+    val s: SettingsPrefs = app.container.settings
+    SectionCard(stringResource(R.string.set_appearance)) {
+        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            FilterChip(
+                selected = ThemeController.dark,
+                onClick = { ThemeController.set(s, true) },
+                label = { Text(stringResource(R.string.theme_dark)) }
+            )
+            FilterChip(
+                selected = !ThemeController.dark,
+                onClick = { ThemeController.set(s, false) },
+                label = { Text(stringResource(R.string.theme_light)) }
+            )
+        }
     }
 }
 

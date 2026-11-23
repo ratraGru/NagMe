@@ -13,8 +13,8 @@ android {
         applicationId = "com.gru.nagme"
         minSdk = 26
         targetSdk = 35
-        versionCode = 18
-        versionName = "0.10.0-demo"
+        versionCode = 19
+        versionName = "0.11.0-demo"
     }
 
     buildTypes {

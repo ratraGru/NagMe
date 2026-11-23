@@ -165,4 +165,7 @@
     <string name="keepalive_text">Reminders keep working after you close the app.</string>
     <string name="set_keepalive">Keep reminders alive in the background</string>
     <string name="set_keepalive_desc">Shows a quiet notification so the phone is less likely to stop NagMe after you swipe it from recents. Turn off if you do not need it.</string>
+    <string name="set_appearance">Appearance</string>
+    <string name="theme_dark">Dark</string>
+    <string name="theme_light">Light</string>
 </resources>

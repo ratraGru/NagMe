@@ -90,7 +90,7 @@ fun OnboardingScreen(onFinish: () -> Unit) {
             TextButton(onClick = onFinish) { Text(stringResource(com.gru.nagme.R.string.ob_skip)) }
         }
         Spacer(Modifier.weight(1f))
-        BobbingFace(MaterialTheme.typography.displayMedium)
+        BobbingFace(160)
         Spacer(Modifier.height(24.dp))
         Text(
             title,

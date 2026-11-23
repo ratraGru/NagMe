@@ -1,14 +1,5 @@
 package com.gru.nagme.ui
 
-import androidx.compose.animation.core.FastOutSlowInEasing
-import androidx.compose.animation.core.RepeatMode
-import androidx.compose.animation.core.animateFloat
-import androidx.compose.animation.core.infiniteRepeatable
-import androidx.compose.animation.core.rememberInfiniteTransition
-import androidx.compose.animation.core.tween
-import androidx.compose.runtime.getValue
-import androidx.compose.ui.graphics.graphicsLayer
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -21,7 +12,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.foundation.layout.size
+import androidx.compose.runtime.remember
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.viewinterop.AndroidView
+import com.gru.nagme.NagMeApp
 import com.gru.nagme.R
+import com.gru.nagme.overlay.CharacterView
 
 /** Empty state lucu (Bagian 10.4). Karakter asli menyusul di hari berikutnya. */
 @Composable
@@ -33,7 +30,7 @@ fun EmptyState(messageRes: Int, modifier: Modifier = Modifier) {
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        BobbingFace(MaterialTheme.typography.displaySmall)
+        BobbingFace(140)
         Text(
             text = stringResource(messageRes),
             style = MaterialTheme.typography.bodyLarge,
@@ -44,21 +41,19 @@ fun EmptyState(messageRes: Int, modifier: Modifier = Modifier) {
     }
 }
 
-/** Wajah kecil yang naik-turun pelan. Hanya satu elemen yang beranimasi, jadi ringan. */
+/** Karakter kecil (tanpa balon) yang bernapas pelan; animasinya ada di CharacterView. */
 @Composable
-fun BobbingFace(style: TextStyle, modifier: Modifier = Modifier) {
-    val transition = rememberInfiniteTransition(label = "bob")
-    val dy by transition.animateFloat(
-        initialValue = -14f,
-        targetValue = 14f,
-        animationSpec = infiniteRepeatable(tween(1200, easing = FastOutSlowInEasing), RepeatMode.Reverse),
-        label = "bobY"
-    )
-    Text(
-        text = "(•‿•)",
-        style = style,
-        color = MaterialTheme.colorScheme.primary,
-        modifier = modifier.graphicsLayer { translationY = dy }
+fun BobbingFace(sizeDp: Int = 140, modifier: Modifier = Modifier) {
+    val ctx = LocalContext.current
+    val style = remember { (ctx.applicationContext as NagMeApp).container.settings.characterStyle }
+    AndroidView(
+        factory = { c ->
+            CharacterView(c).apply {
+                compact = true
+                this.style = style
+            }
+        },
+        modifier = modifier.size(sizeDp.dp)
     )
 }
 

@@ -69,16 +69,16 @@ fun TaskCard(
                 scaleX = scale
                 scaleY = scale
             },
-        shape = RoundedCornerShape(16.dp),
+        shape = RoundedCornerShape(20.dp),
         colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.surfaceContainerLowest
+            containerColor = MaterialTheme.colorScheme.surfaceContainer
         ),
         // Tanpa bayangan (berat di GPU HP kentang); diganti garis tipis.
         elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
         border = BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant)
     ) {
         Row(
-            modifier = Modifier.padding(start = 16.dp, top = 12.dp, bottom = 12.dp, end = 8.dp),
+            modifier = Modifier.padding(start = 18.dp, top = 14.dp, bottom = 14.dp, end = 10.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
             if (task.category != NO_CATEGORY && task.category in Categories.colors.indices) {

@@ -86,6 +86,7 @@ fun SettingsScreen(onOpenCharacter: () -> Unit, modifier: Modifier = Modifier) {
             color = MaterialTheme.colorScheme.onBackground
         )
         CharacterEntryCard(onClick = onOpenCharacter)
+        AppearanceCard()
         Text(
             text = stringResource(R.string.perm_section_title),
             style = MaterialTheme.typography.titleMedium,

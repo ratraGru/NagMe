@@ -165,4 +165,7 @@
     <string name="keepalive_text">Pengingat tetap berjalan walau aplikasi ditutup.</string>
     <string name="set_keepalive">Jaga pengingat tetap aktif di latar belakang</string>
     <string name="set_keepalive_desc">Menampilkan notifikasi senyap agar perangkat lebih jarang menghentikan NagMe setelah digeser dari aplikasi terbaru. Matikan jika tidak diperlukan.</string>
+    <string name="set_appearance">Tampilan</string>
+    <string name="theme_dark">Gelap</string>
+    <string name="theme_light">Terang</string>
 </resources>
